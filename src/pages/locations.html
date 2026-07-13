@@ -1,0 +1,165 @@
+<!--
+title: Locations — iTrust Wellness
+desc: Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC — plus telehealth, so you can be seen from wherever you feel safe.
+nav: locations
+-->
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <p class="breadcrumb"><a href="index.html">Home</a><span>›</span>Locations</p>
+        <p class="eyebrow">Find care near you</p>
+        <h1>Three South Carolina locations, plus telehealth</h1>
+        <p>Visit us in person or connect from home. Wherever you feel safe, we're ready to care for you.</p>
+      </div>
+      <div class="page-hero-media">
+        <figure class="hero-photo-frame">
+          <img src="assets/photos/locations-hero.jpg" alt="A woman connecting from home on her laptop with a cup of coffee — telehealth care" style="object-position:50% 100%" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="locations">
+    <div class="container">
+      <div class="loc-grid">
+        <article class="loc-card">
+          <h3>West Greenville</h3>
+          <p class="loc-addr">149 Commons Way<br>Greenville, SC 29611</p>
+          <p class="loc-hours">Mon–Thu 8:00am–4:00pm<br>Fri 8:00am–12:00pm</p>
+          <p class="loc-tag">Telehealth &amp; in-person</p>
+        </article>
+        <article class="loc-card">
+          <span class="loc-flag">Recently opened</span>
+          <h3>Anderson</h3>
+          <p class="loc-addr">214 Straight Drive<br>Anderson, SC 29625</p>
+          <p class="loc-hours">Mon–Thu 8:00am–4:00pm<br>Fri 8:00am–12:00pm</p>
+          <p class="loc-tag">Telehealth &amp; in-person</p>
+        </article>
+        <article class="loc-card">
+          <h3>Spartanburg</h3>
+          <p class="loc-addr">115C Southport Road<br>Spartanburg, SC 29306</p>
+          <p class="loc-hours">Mon–Thu 8:00am–4:00pm<br>Fri 8:00am–12:00pm</p>
+          <p class="loc-tag">Telehealth &amp; in-person</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP OF THE THREE LOCATIONS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <section class="section-pad loc-maps" style="padding-top:0">
+    <div class="container">
+      <h2 class="section-title center">Find us on the map</h2>
+      <div id="locmap" class="loc-map-single" role="img" aria-label="Map showing iTrust Wellness clinics in Greenville, Anderson, and Spartanburg, South Carolina, with nearby landmarks"></div>
+      <div class="loc-legend">
+        <span><i class="dot red"></i> iTrust Wellness clinic</span>
+        <span><i class="dot blue"></i> Nearby landmark</span>
+      </div>
+    </div>
+  </section>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  (function () {
+    var el = document.getElementById("locmap");
+    if (!el || typeof L === "undefined") return;
+
+    // our clinics (red pins)
+    var clinics = [
+      { name: "West Greenville", addr: "149 Commons Way, Greenville, SC 29611", lat: 34.8539707, lng: -82.4566156 },
+      { name: "Anderson", addr: "214 Straight Drive, Anderson, SC 29625", lat: 34.5471596, lng: -82.6788297 },
+      { name: "Spartanburg", addr: "115C Southport Road, Spartanburg, SC 29306", lat: 34.9080229, lng: -81.9322725 }
+    ];
+    // helpful nearby establishments & landmarks (blue pins)
+    var places = [
+      // Greenville area
+      { name: "Prisma Health Greenville Memorial Hospital", type: "Hospital", lat: 34.8195980, lng: -82.4104176 },
+      { name: "Bon Secours Wellness Arena", type: "Downtown landmark", lat: 34.8527060, lng: -82.3915606 },
+      { name: "Walgreens", type: "Pharmacy", lat: 34.8514621, lng: -82.4516603 },
+      { name: "CVS Pharmacy", type: "Pharmacy", lat: 34.8220680, lng: -82.4157908 },
+      { name: "Ingles", type: "Grocery", lat: 34.8674451, lng: -82.4664937 },
+      { name: "Food Lion", type: "Grocery", lat: 34.8187758, lng: -82.4189393 },
+      { name: "Bojangles'", type: "Restaurant", lat: 34.8176626, lng: -82.4197129 },
+      { name: "Bank of America", type: "Bank", lat: 34.8839120, lng: -82.4565953 },
+      // Anderson area
+      { name: "AnMed Health Medical Center", type: "Hospital", lat: 34.5117662, lng: -82.6464125 },
+      { name: "Anderson University", type: "University", lat: 34.5148116, lng: -82.6383550 },
+      { name: "Walmart Supercenter", type: "Store", lat: 34.5543360, lng: -82.6787175 },
+      { name: "Walgreens", type: "Pharmacy", lat: 34.5318437, lng: -82.6641718 },
+      { name: "Ingles", type: "Grocery", lat: 34.5213510, lng: -82.6538294 },
+      { name: "Publix", type: "Grocery", lat: 34.5309097, lng: -82.6363625 },
+      // Spartanburg area
+      { name: "Spartanburg Medical Center", type: "Hospital", lat: 34.9669664, lng: -81.9387309 },
+      { name: "University of South Carolina Upstate", type: "University", lat: 35.0003217, lng: -81.9708850 },
+      { name: "Walgreens", type: "Pharmacy", lat: 34.9206548, lng: -81.8874854 },
+      { name: "Ingles", type: "Grocery", lat: 34.9327895, lng: -81.8943976 },
+      { name: "Food Lion", type: "Grocery", lat: 34.8693435, lng: -81.9592871 },
+      { name: "Bojangles'", type: "Restaurant", lat: 34.9204886, lng: -81.8909243 },
+      { name: "Bank of America", type: "Bank", lat: 34.9231779, lng: -81.9756084 },
+      // northern area
+      { name: "Travelers Rest", type: "Town", lat: 34.9676167, lng: -82.4434548 },
+      { name: "Furman University", type: "University", lat: 34.9257744, lng: -82.4385258 },
+      { name: "Paris Mountain State Park", type: "State park", lat: 34.9420096, lng: -82.3901867 },
+      { name: "Landrum", type: "Town", lat: 35.1751148, lng: -82.1892007 },
+      // southern area
+      { name: "Simpsonville", type: "Town", lat: 34.7373045, lng: -82.2553710 },
+      { name: "Fountain Inn", type: "Town", lat: 34.6925263, lng: -82.1987922 },
+      { name: "Laurens", type: "Town", lat: 34.4646451, lng: -81.9944042 },
+      { name: "Presbyterian College", type: "University", lat: 34.4627505, lng: -81.8671771 }
+    ];
+
+    function pin(color, w) {
+      var h = Math.round(w * 1.46);
+      return L.divIcon({
+        className: "", iconSize: [w, h], iconAnchor: [w / 2, h], popupAnchor: [0, -h * 0.85],
+        html: '<svg width="' + w + '" height="' + h + '" viewBox="0 0 26 38" xmlns="http://www.w3.org/2000/svg">' +
+              '<path d="M13 0C5.82 0 0 5.82 0 13c0 9.75 13 25 13 25s13-15.25 13-25C26 5.82 20.18 0 13 0z" fill="' + color + '" stroke="#fff" stroke-width="1.5"/>' +
+              '<circle cx="13" cy="13" r="4.6" fill="#fff"/></svg>'
+      });
+    }
+
+    var map = L.map("locmap", { scrollWheelZoom: false });
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    var pts = [];
+    places.forEach(function (p) {
+      L.marker([p.lat, p.lng], { icon: pin("#2b6cb0", 24) }).addTo(map)
+        .bindPopup("<strong>" + p.name + "</strong><br>" + p.type);
+      pts.push([p.lat, p.lng]);
+    });
+    clinics.forEach(function (c) {
+      L.marker([c.lat, c.lng], { icon: pin("#c0392b", 32), zIndexOffset: 1000 }).addTo(map)
+        .bindPopup("<strong>iTrust Wellness — " + c.name + "</strong><br>" + c.addr);
+      pts.push([c.lat, c.lng]);
+    });
+    map.fitBounds(pts, { padding: [45, 45] });
+  })();
+  </script>
+
+  <!-- TELEHEALTH BAND -->
+  <section class="section-pad" style="padding-top:0">
+    <div class="container">
+      <div class="info-card dark">
+        <h3>Prefer to be seen from home?</h3>
+        <p>All three locations offer telehealth appointments, so you can get the same compassionate care from wherever you feel most comfortable.</p>
+        <a href="patients.html#book" class="btn btn-primary">Book a telehealth visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h2>We're ready when you are</h2>
+        <p>Call us or book online — a welcoming first conversation is just a moment away.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="tel:8645202020" class="btn btn-dark btn-lg">Call 864-520-2020</a>
+        <a href="patients.html#book" class="btn btn-primary btn-lg">Book online</a>
+      </div>
+    </div>
+  </section>
