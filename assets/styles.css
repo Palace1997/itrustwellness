@@ -265,6 +265,8 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
 .cta-band h2{font-size:clamp(1.7rem,3.5vw,2.6rem);max-width:18ch}
 .cta-band p{color:var(--evergreen);font-size:1.1rem;margin-top:10px;max-width:46ch}
+.cta-band h2.cta-oneline{max-width:none}
+@media(min-width:761px){.cta-band h2.cta-oneline{white-space:nowrap}}
 .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
 
 /* ---------- footer ---------- */
