@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Locations — iTrust Wellness</title>
-  <meta name="description" content="Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC — plus telehealth, so you can be seen from wherever you feel safe." />
+  <title>Locations | iTrust Wellness</title>
+  <meta name="description" content="Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC, plus telehealth, so you can be seen from wherever you feel safe." />
 
   <!-- Favicon (real iTrust mark) -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
@@ -13,12 +13,12 @@
   <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="iTrust Wellness" />
-  <meta property="og:title" content="Locations — iTrust Wellness" />
-  <meta property="og:description" content="Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC — plus telehealth, so you can be seen from wherever you feel safe." />
+  <meta property="og:title" content="Locations | iTrust Wellness" />
+  <meta property="og:description" content="Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC, plus telehealth, so you can be seen from wherever you feel safe." />
   <meta property="og:image" content="assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Locations — iTrust Wellness" />
-  <meta name="twitter:description" content="Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC — plus telehealth, so you can be seen from wherever you feel safe." />
+  <meta name="twitter:title" content="Locations | iTrust Wellness" />
+  <meta name="twitter:description" content="Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC, plus telehealth, so you can be seen from wherever you feel safe." />
   <meta name="twitter:image" content="assets/og-image.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,11 +68,12 @@
               </div>
               <div class="mega-col">
                 <h4>Treatment Methods</h4>
-                <div class="mega-links"><a href="treatments.html#methods">Psychiatric Medications</a>
-<a href="treatments.html#methods">Genetic Testing</a>
-<a href="treatments.html#methods">Long-Acting Injectables</a>
-<a href="treatments.html#methods">Diagnostic Assessments</a>
-<a href="treatments.html#methods">Substance Use Treatment</a></div>
+                <div class="mega-links"><a href="treatments.html#methods">Medication management</a>
+<a href="treatments.html#methods">Genetic testing</a>
+<a href="treatments.html#methods">Long-Acting Injectables (LAIs)</a>
+<a href="treatments.html#methods">Diagnostic assessments</a>
+<a href="treatments.html#methods">Substance use disorder care</a>
+<a href="treatments.html#methods">Personalized plans</a></div>
               </div>
               <a class="mega-feature" href="treatments.html">
                 <img src="assets/photos/conditions/anxiety.jpg" alt="" loading="lazy" />
@@ -111,7 +112,7 @@
       </div>
       <div class="page-hero-media">
         <figure class="hero-photo-frame">
-          <img src="assets/photos/locations-hero.jpg" alt="A woman connecting from home on her laptop with a cup of coffee — telehealth care" style="object-position:50% 100%" />
+          <img src="assets/photos/locations-hero.jpg" alt="A woman connecting from home on her laptop with a cup of coffee, telehealth care" style="object-position:50% 100%" />
         </figure>
       </div>
     </div>
@@ -229,7 +230,7 @@
     });
     clinics.forEach(function (c) {
       L.marker([c.lat, c.lng], { icon: pin("#c0392b", 32), zIndexOffset: 1000 }).addTo(map)
-        .bindPopup("<strong>iTrust Wellness — " + c.name + "</strong><br>" + c.addr);
+        .bindPopup("<strong>iTrust Wellness, " + c.name + "</strong><br>" + c.addr);
       pts.push([c.lat, c.lng]);
     });
     map.fitBounds(pts, { padding: [45, 45] });
@@ -252,7 +253,7 @@
     <div class="container cta-inner">
       <div>
         <h2>We're ready when you are</h2>
-        <p>Call us or book online — a welcoming first conversation is just a moment away.</p>
+        <p>Call us or book online, a welcoming first conversation is just a moment away.</p>
       </div>
       <div class="cta-actions">
         <a href="tel:8645202020" class="btn btn-dark btn-lg">Call 864-520-2020</a>
@@ -295,7 +296,7 @@
         <a href="treatments.html#methods">Medication management</a>
         <a href="treatments.html#methods">Genetic testing</a>
         <a href="treatments.html#methods">Diagnostic assessments</a>
-        <a href="treatments.html#methods">Long-Acting Injectables</a>
+        <a href="treatments.html#methods">Long-Acting Injectables (LAIs)</a>
       </div>
       <div class="foot-col">
         <h4>Patients</h4>
@@ -309,7 +310,7 @@
         <h4>Partners</h4>
         <a href="partners.html#refer">Refer a patient</a>
         <a href="partners.html#employer">Employer programs</a>
-        <a href="partners.html#careers">Careers</a>
+        <a href="careers.html">Careers</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>

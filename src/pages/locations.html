@@ -1,6 +1,6 @@
 <!--
-title: Locations — iTrust Wellness
-desc: Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC — plus telehealth, so you can be seen from wherever you feel safe.
+title: Locations | iTrust Wellness
+desc: Find iTrust Wellness mental health care in Greenville, Anderson, and Spartanburg, SC, plus telehealth, so you can be seen from wherever you feel safe.
 nav: locations
 -->
   <!-- PAGE HERO -->
@@ -14,7 +14,7 @@ nav: locations
       </div>
       <div class="page-hero-media">
         <figure class="hero-photo-frame">
-          <img src="assets/photos/locations-hero.jpg" alt="A woman connecting from home on her laptop with a cup of coffee — telehealth care" style="object-position:50% 100%" />
+          <img src="assets/photos/locations-hero.jpg" alt="A woman connecting from home on her laptop with a cup of coffee, telehealth care" style="object-position:50% 100%" />
         </figure>
       </div>
     </div>
@@ -132,7 +132,7 @@ nav: locations
     });
     clinics.forEach(function (c) {
       L.marker([c.lat, c.lng], { icon: pin("#c0392b", 32), zIndexOffset: 1000 }).addTo(map)
-        .bindPopup("<strong>iTrust Wellness — " + c.name + "</strong><br>" + c.addr);
+        .bindPopup("<strong>iTrust Wellness, " + c.name + "</strong><br>" + c.addr);
       pts.push([c.lat, c.lng]);
     });
     map.fitBounds(pts, { padding: [45, 45] });
@@ -155,7 +155,7 @@ nav: locations
     <div class="container cta-inner">
       <div>
         <h2>We're ready when you are</h2>
-        <p>Call us or book online — a welcoming first conversation is just a moment away.</p>
+        <p>Call us or book online, a welcoming first conversation is just a moment away.</p>
       </div>
       <div class="cta-actions">
         <a href="tel:8645202020" class="btn btn-dark btn-lg">Call 864-520-2020</a>
