@@ -440,6 +440,9 @@
   var CURTHREAD=null;
   function todayKey(){return "2026-6-16";/* fixed for demo: July 16, 2026 */}
   function fmtKey(k){var p=k.split("-");return MONTHS[+p[1]]+" "+p[2]+", "+p[0];}
+  function dayKeyDate(k){var p=k.split("-");return new Date(+p[0],+p[1],+p[2]);}
+  function isFutureDay(k){var t=todayKey().split("-");return dayKeyDate(k)>=new Date(+t[0],+t[1],+t[2]);}
+  function dayChipLabel(k){var p=k.split("-");var dt=dayKeyDate(k);return ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][dt.getDay()]+", "+["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+p[1]]+" "+p[2];}
   function calHTML(y,m){
     var first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate(), tk=todayKey();
     var dow=["Su","Mo","Tu","We","Th","Fr","Sa"].map(function(d){return '<div class="dow">'+d+'</div>';}).join("");
@@ -453,7 +456,8 @@
     var up=UP[SEL], past=PAST[SEL];
     if(up) return '<div class="card detail"><span class="lbl-mini">'+fmtKey(SEL)+' · Upcoming</span><h3 style="margin:8px 0 2px">'+up.split(" · ")[0]+'</h3><p class="muted" style="margin:0 0 12px">'+up+'</p><button class="btn primary" data-act="join">Join visit</button></div>';
     if(past) return '<div class="card detail"><span class="lbl-mini">'+fmtKey(SEL)+' · Past</span><h3 style="margin:8px 0 2px">'+past.split(" · ")[0]+'</h3><p class="muted" style="margin:0 0 12px">'+past+'</p><button class="btn soft" data-act="download">View recap</button></div>';
-    return '<div class="card detail"><span class="lbl-mini">'+fmtKey(SEL)+'</span><p class="muted" style="margin:6px 0 12px">No visit scheduled this day.</p><button class="btn soft" data-act="book">Book a visit</button></div>';
+    if(isFutureDay(SEL)) return '<div class="card detail"><span class="lbl-mini">'+fmtKey(SEL)+'</span><p class="muted" style="margin:6px 0 12px">No visit scheduled this day. Book one for '+dayChipLabel(SEL)+'.</p><button class="btn soft" data-act="bookday" data-day="'+SEL+'">Book for this day</button></div>';
+    return '<div class="card detail"><span class="lbl-mini">'+fmtKey(SEL)+'</span><p class="muted" style="margin:6px 0 12px">No visit on this day.</p><button class="btn soft" data-act="book">Book a visit</button></div>';
   }
 
   var VIEWS={
@@ -513,8 +517,9 @@
         body='<h3>What can we help with?</h3><div class="bk-opts">'+types.map(function(t){return '<button class="bk-opt'+(BK.type===t?" sel":"")+'" data-bk="type:'+t+'">'+t+'</button>';}).join("")+'</div><div class="bk-nav"><button class="btn" data-bk="cancel">Cancel</button><button class="btn primary" data-bk="next"'+(BK.type?"":" disabled")+'>Next</button></div>';
       } else if(BK.step===2){
         var dates=[["2026-6-27","Mon, Jul 27"],["2026-6-28","Tue, Jul 28"],["2026-6-29","Wed, Jul 29"],["2026-6-30","Thu, Jul 30"]];
+        if(BK.date&&!dates.some(function(d){return d[0]===BK.date;}))dates.unshift([BK.date,dayChipLabel(BK.date)]);
         var times=["9:00 AM","10:00 AM","11:30 AM","1:00 PM","3:30 PM"];
-        body='<h3>Pick a day</h3><div class="bk-chips">'+dates.map(function(d){return '<button class="bk-chip'+(BK.date===d[0]?" sel":"")+'" data-bk="date:'+d[0]+'">'+d[1]+'</button>';}).join("")+'</div><h3 style="margin:18px 0 12px">Pick a time</h3><div class="bk-chips">'+times.map(function(t){var tk=BK.date&&TAKEN[BK.date+"|"+t];return tk?'<button class="bk-chip taken" disabled>'+t+' · booked</button>':'<button class="bk-chip'+(BK.time===t?" sel":"")+'" data-bk="time:'+t+'">'+t+'</button>';}).join("")+'</div><div class="bk-nav"><button class="btn" data-bk="back">Back</button><button class="btn primary" data-bk="next"'+(BK.date&&BK.time?"":" disabled")+'>Next</button></div>';
+        body='<h3>Pick a day</h3><div class="bk-chips">'+dates.map(function(d){return '<button class="bk-chip'+(BK.date===d[0]?" sel":"")+'" data-bk="date:'+d[0]+'">'+d[1]+(BK.fromDay&&BK.fromDay===d[0]?" · your pick":"")+'</button>';}).join("")+'</div><h3 style="margin:18px 0 12px">Pick a time</h3><div class="bk-chips">'+times.map(function(t){var tk=BK.date&&TAKEN[BK.date+"|"+t];return tk?'<button class="bk-chip taken" disabled>'+t+' · booked</button>':'<button class="bk-chip'+(BK.time===t?" sel":"")+'" data-bk="time:'+t+'">'+t+'</button>';}).join("")+'</div><div class="bk-nav"><button class="btn" data-bk="back">Back</button><button class="btn primary" data-bk="next"'+(BK.date&&BK.time?"":" disabled")+'>Next</button></div>';
       } else if(BK.step===3){
         var modes=["Video visit","In person · Greenville"];
         body='<h3>Almost there</h3><div class="bk-review"><div><span class="lbl-mini">Visit</span><p>'+BK.type+'</p></div><div><span class="lbl-mini">When</span><p>'+fmtKey(BK.date)+' · '+BK.time+'</p></div></div><h3 style="margin:18px 0 12px">How would you like to meet?</h3><div class="bk-chips">'+modes.map(function(m){return '<button class="bk-chip'+(BK.mode===m?" sel":"")+'" data-bk="mode:'+m+'">'+m+'</button>';}).join("")+'</div><div class="bk-nav"><button class="btn" data-bk="back">Back</button><button class="btn primary" data-bk="confirm"'+(BK.mode?"":" disabled")+'>Confirm booking</button></div>';
@@ -623,6 +628,7 @@
     if(el.dataset.key!==undefined){SEL=(SEL===el.dataset.key?null:el.dataset.key);render("appointments");return;}
     if(el.dataset.thread!==undefined){render("thread",+el.dataset.thread);return;}
     if(el.dataset.view){render(el.dataset.view);return;}
+    if(el.dataset.act==="bookday"){BK={step:1,date:el.dataset.day,fromDay:el.dataset.day};render("booking");return;}
     if(el.dataset.act==="book"){BK={step:1};render("booking");return;}
     if(el.dataset.act==="msg"){render("compose");return;}
     if(el.dataset.act==="checkin"){render("checkin");return;}
