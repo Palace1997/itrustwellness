@@ -42,6 +42,10 @@
   .login .logo{justify-content:center;margin-bottom:20px}
   .login h1{font-size:1.7rem;margin:0 0 4px;text-align:center;letter-spacing:-.03em;font-weight:800}
   .login .sub{text-align:center;color:var(--muted);margin:0 0 22px;font-size:.92rem}
+  .role-tabs{display:flex;border:1px solid var(--ink);border-radius:3px;margin:0 0 22px;overflow:hidden}
+  .role-tab{flex:1;background:#fff;border:none;padding:11px 8px;font-family:inherit;font-weight:700;font-size:.86rem;color:var(--muted);cursor:pointer;border-right:1px solid var(--ink)}
+  .role-tab:last-child{border-right:none}
+  .role-tab.on{background:var(--ink);color:#fff}
   .fld{margin:14px 0}
   .fld label{display:block;margin-bottom:7px;font:700 .66rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .fld input{width:100%;border:1px solid var(--line);border-radius:3px;padding:12px 14px;font-family:inherit;font-size:1rem;background:#fff}
@@ -238,13 +242,16 @@
     <div class="login" id="login">
       <div class="box">
         <div class="logo"><img src="../assets/itrust-logo.svg" alt="iTrust Wellness" class="brand-logo" /></div>
-        <h1>Sign in</h1>
-        <p class="sub">Your care, on the record.</p>
-        <div class="fld"><label>Email</label><input type="email" value="jordan@example.com" /></div>
-        <div class="fld"><label>Password</label><input type="password" value="demo-demo-demo" /></div>
+        <h1 id="li-h1">Sign in</h1>
+        <p class="sub" id="li-sub">Your care, on the record.</p>
+        <div class="role-tabs" role="tablist" aria-label="Sign in as">
+          <button type="button" class="role-tab on" id="role-patient" role="tab" aria-selected="true">I'm a patient</button>
+          <button type="button" class="role-tab" id="role-practitioner" role="tab" aria-selected="false">I'm a practitioner</button>
+        </div>
+        <div class="fld"><label>Email</label><input type="email" id="li-email" value="jordan@example.com" /></div>
+        <div class="fld"><label>Password</label><input type="password" id="li-pass" value="demo-demo-demo" /></div>
         <button class="btn primary" id="signin">Continue</button>
-        <p class="note">Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication.</p>
-        <p class="note" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">Reviewing as staff? <a href="admin.html" style="color:var(--ink);font-weight:700;text-decoration:none;border-bottom:1px solid var(--ink)">Open the provider dashboard →</a></p>
+        <p class="note" id="li-note">Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication.</p>
       </div>
     </div>
 
@@ -661,7 +668,28 @@
   document.addEventListener("click",function(e){var h=e.target.closest&&e.target.closest("[data-help]");if(!h)return;var m=$("helpModal");if(h.dataset.help==="open")m.classList.add("on");else m.classList.remove("on");});
   $("helpModal").addEventListener("click",function(e){if(e.target===this)this.classList.remove("on");});
   function enterApp(){$("login").style.display="none";$("app").classList.add("on");render("dashboard");}
+  var LOGIN_ROLE="patient";
+  var ROLE_COPY={
+    patient:{h1:"Sign in",sub:"Your care, on the record.",email:"jordan@example.com",pass:"demo-demo-demo",note:"Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication."},
+    practitioner:{h1:"Staff sign in",sub:"Provider &amp; care team access.",email:"dr.rivera@itrustwellness.com",pass:"staff-demo-2026",note:"Demo staff login — no real account. Click <strong>Continue</strong> to open the provider dashboard. A live version would require verified staff credentials, separate from patient sign-in."}
+  };
+  function setLoginRole(role){
+    LOGIN_ROLE=role;
+    var c=ROLE_COPY[role];
+    $("li-h1").textContent=c.h1; $("li-sub").innerHTML=c.sub; $("li-note").innerHTML=c.note;
+    $("li-email").value=c.email; $("li-pass").value=c.pass;
+    var pt=$("role-patient"), pr=$("role-practitioner");
+    pt.classList.toggle("on",role==="patient"); pt.setAttribute("aria-selected",role==="patient");
+    pr.classList.toggle("on",role==="practitioner"); pr.setAttribute("aria-selected",role==="practitioner");
+  }
+  $("role-patient").addEventListener("click",function(){setLoginRole("patient");});
+  $("role-practitioner").addEventListener("click",function(){setLoginRole("practitioner");});
   $("signin").addEventListener("click",function(){
+    if(LOGIN_ROLE==="practitioner"){
+      try{localStorage.setItem("itrust-demo-session","1");}catch(e){}
+      location.href="admin.html";
+      return;
+    }
     var email=(document.querySelector('#login input[type=email]')||{}).value||"";
     var acc=findAccount(email);
     if(!acc){toast("No account found for that email. Create it in the provider console, or use jordan@example.com.");return;}
