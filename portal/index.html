@@ -424,6 +424,9 @@
   // demo persistence — PER-ACCOUNT localStorage (device-local, sample data only, no server/PHI)
   var LSROOT="aster-portal-demo";
   if(location.search.indexOf("reset")>-1){try{for(var _k=localStorage.length-1;_k>=0;_k--){var _kk=localStorage.key(_k);if(_kk&&_kk.indexOf(LSROOT)===0)localStorage.removeItem(_kk);}localStorage.removeItem("itrust-demo-session");localStorage.removeItem("itrust-demo-account");}catch(e){}}
+  // Arriving fresh from the main site (?signin) always shows the sign-in/role screen,
+  // even if this browser already had a saved demo session from a previous visit.
+  if(location.search.indexOf("signin")>-1){try{localStorage.removeItem("itrust-demo-session");}catch(e){}}
   function snapshot(){return {up:DATA.upcoming,past:DATA.past,th:DATA.threads,docs:DATA.docs,bill:DATA.bill,UP:UP,PAST:PAST,CH:CHECKINS,TK:TAKEN,mood:MOOD,scores:SCORES,hw:CAREPLAN.homework,goals:CAREPLAN.goals,conds:CAREPLAN.conditions.map(function(c){return c.name;})};}
   var JORDAN_DEFAULTS=JSON.parse(JSON.stringify(snapshot()));
   function applyData(d){DATA.upcoming=d.up||[];DATA.past=d.past||[];DATA.threads=d.th||[];DATA.docs=d.docs||[];DATA.bill=d.bill||{balance:"$0.00",items:[]};UP=d.UP||{};PAST=d.PAST||{};CHECKINS=typeof d.CH==="number"?d.CH:0;TAKEN=d.TK||{};MOOD=d.mood||[];SCORES=d.scores||{phq9:[],gad7:[]};CAREPLAN.homework=d.hw||[];if(d.goals)CAREPLAN.goals=d.goals;}
