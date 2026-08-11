@@ -321,8 +321,6 @@
     }).join("");
     return '<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:auto;display:block">'+g+'</svg>';
   }
-  function moodAvg(list,key){if(!list.length)return 0;var s=0;for(var i=0;i<list.length;i++)s+=list[i][key];return s/list.length;}
-  function moodTrendLabel(){if(MOOD.length<4)return "New";var a=moodAvg(MOOD.slice(0,3),"m"),b=moodAvg(MOOD.slice(-3),"m");return b>a+0.3?"Trending up":(b<a-0.3?"Needs attention":"Steady");}
   function lastScore(key){var a=SCORES[key];return a&&a.length?a[a.length-1]:null;}
   function assessTile(key){
     var sc=SCREENERS[key], last=lastScore(key), sev=last?sc.sev(last.v):null, flag=last&&(sev.flag||last.risk);
@@ -478,14 +476,6 @@
         '<div class="feature"><span class="chip">Up next — '+a.in+'</span>'+
           '<p class="big">'+a.date+' · '+a.time+'</p><p class="sub">'+a.type+' · '+a.mode+' · '+a.who+'</p>'+
           '<div class="row"><button class="btn primary" data-act="join">'+svg("video")+'Join visit</button><button class="btn" data-act="reschedule">Reschedule</button></div></div>'+
-        '<div class="grid2">'+
-          '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Messages</h3>'+(function(){var u=DATA.threads.filter(function(t){return t.unread;}).length;return u?'<span class="chip solid">'+u+' new</span>':'';})()+'</div>'+
-            '<p class="muted" style="margin:8px 0 14px;font-size:.92rem">'+(DATA.threads.length?(function(){var t=DATA.threads[0];var lm=t.msgs[t.msgs.length-1];var dir=lm.f==="me"?"You → "+t.who:t.who+" → you";return '<span class="msg-dir">'+dir+'</span><br>"'+lm.t.slice(0,52)+'…"';})():'No messages yet.')+'</p><button class="btn soft" data-view="messages">Open inbox</button></div>'+
-          '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Mood, last 2 weeks</h3><span class="chip dim">'+moodTrendLabel()+'</span></div>'+
-            '<div style="margin:10px 0 8px">'+moodChart(MOOD,[{key:"m",max:4,color:"#17281e"}],64)+'</div>'+
-            '<div class="streak">'+[0,1,2,3,4,5,6].map(function(i){return '<span'+(i<CHECKINS?" class=\"on\"":"")+'></span>';}).join("")+'</div>'+
-            '<button class="btn soft" style="margin-top:14px" data-act="checkin">Log today</button></div>'+
-        '</div>'+
         '<h2 class="sec" style="margin-top:22px">Assessments</h2>'+
         '<div class="grid2">'+assessTile("phq9")+assessTile("gad7")+'</div>';
     },
