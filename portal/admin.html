@@ -484,6 +484,22 @@
   var PT={email:"jordan@example.com",name:"Jordan"};
   function acctKey(email){return "aster-portal-demo::"+String(email||"").toLowerCase();}
   function patientList(){return getClients();}
+  // Merges every patient's own store into one worklist, so a visit booked by ANY patient
+  // shows up here - not just whichever patient happens to be selected in the snapshot below.
+  function collectAppointments(){
+    var rows=[], totalNew=0, next=null;
+    patientList().forEach(function(p){
+      var s; try{s=JSON.parse(localStorage.getItem(acctKey(p.email))||"null");}catch(e){}
+      var appts=(s&&s.up)||[];
+      if(!appts.length)return;
+      var lastSeen=parseInt(localStorage.getItem("aster-admin-lastseen::"+p.email)||"0",10);
+      var newCount=Math.max(0,appts.length-lastSeen), firstNew=appts.length-newCount;
+      appts.forEach(function(a,i){rows.push({a:a,name:p.name,isNew:i>=firstNew});});
+      totalNew+=newCount;
+      if(!next)next={a:appts[0],name:p.name};
+    });
+    return {rows:rows,total:rows.length,totalNew:totalNew,next:next};
+  }
   function setPatient(email){
     var list=patientList(), p=null;
     for(var i=0;i<list.length;i++){if(String(list[i].email||"").toLowerCase()===String(email||"").toLowerCase()){p=list[i];break;}}
@@ -552,30 +568,33 @@
     var lastSeen=parseInt(localStorage.getItem(SEENKEY)||"0",10);
     var newCount=Math.max(0,appts.length-lastSeen);
 
+    // Appointments are practice-wide: any visit booked by any patient shows up here,
+    // not just the one currently selected in the snapshot below.
+    var AGG=collectAppointments();
+
     // alert
     var al=document.getElementById("alert");
-    if(newCount>0){al.style.display="flex";al.innerHTML='<div class="alert-dot"></div><div class="alert-text"><b>'+newCount+' New Appointment'+(newCount===1?"":"s")+'</b> Booked Since You Last Checked.</div>';}
+    if(AGG.totalNew>0){al.style.display="flex";al.innerHTML='<div class="alert-dot"></div><div class="alert-text"><b>'+AGG.totalNew+' New Appointment'+(AGG.totalNew===1?"":"s")+'</b> Booked Since You Last Checked.</div>';}
     else{al.style.display="none";}
 
     // stats
-    document.getElementById("s-appts").textContent=appts.length;
-    document.getElementById("s-new").textContent=newCount;
+    document.getElementById("s-appts").textContent=AGG.total;
+    document.getElementById("s-new").textContent=AGG.totalNew;
 
-    // next appointment highlight (overview)
+    // next appointment highlight (overview) - nearest booked visit across all patients
     var na=document.getElementById("next-appt");
     if(na){
-      if(appts.length){var a0=appts[0];
+      if(AGG.next){var a0=AGG.next.a;
         na.className="next-appt";
-        na.innerHTML='<span class="lbl">Up Next</span><div class="when">'+a0.date+' · '+a0.time+'</div><div class="meta">'+a0.type+' · '+(a0.mode||"")+'</div><div class="meta">Patient: '+PT.name+' · '+(a0.who||"Dr. Rivera")+'</div>';
+        na.innerHTML='<span class="lbl">Up Next</span><div class="when">'+a0.date+' · '+a0.time+'</div><div class="meta">'+a0.type+' · '+(a0.mode||"")+'</div><div class="meta">Patient: '+AGG.next.name+' · '+(a0.who||"Dr. Rivera")+'</div>';
       } else { na.className="next-appt empty"; na.textContent="No upcoming appointments."; }
     }
 
-    // appointments table (last newCount are the fresh ones)
-    var firstNew=appts.length-newCount;
-    var ac=document.getElementById("appts-count"); if(ac){ac.textContent=appts.length+" total";}
+    // appointments table - merged across all patients
+    var ac=document.getElementById("appts-count"); if(ac){ac.textContent=AGG.total+" total";}
     var at=document.getElementById("appts"); if(at){
-      at.innerHTML=appts.map(function(a,i){
-        return '<tr><td><div class="patient-cell"><span class="mini-avatar">'+String(PT.name).charAt(0)+'</span>'+PT.name+'</div></td><td>'+a.type+(a.who?'<div class="muted-cell" style="font-size:12px">with '+a.who+'</div>':'')+'</td><td>'+a.date+' · '+a.time+'</td><td class="muted-cell">'+(a.mode||"")+'</td><td>'+(i>=firstNew?'<span class="tag tag-new">New</span>':'<span class="tag tag-confirmed">Confirmed</span>')+'</td></tr>';
+      at.innerHTML=AGG.rows.map(function(row){var a=row.a;
+        return '<tr><td><div class="patient-cell"><span class="mini-avatar">'+String(row.name).charAt(0)+'</span>'+row.name+'</div></td><td>'+a.type+(a.who?'<div class="muted-cell" style="font-size:12px">with '+a.who+'</div>':'')+'</td><td>'+a.date+' · '+a.time+'</td><td class="muted-cell">'+(a.mode||"")+'</td><td>'+(row.isNew?'<span class="tag tag-new">New</span>':'<span class="tag tag-confirmed">Confirmed</span>')+'</td></tr>';
       }).join("");
     }
 
