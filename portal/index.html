@@ -39,43 +39,62 @@
   .logo .brand-logo{height:50px;width:auto;display:block}
 
   /* ---- Sign-in: "The Portal" product layout ---- */
-  .login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:44px 20px 28px;background:var(--paper)}
-  .portal-shell{width:100%;max-width:1160px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 60px -30px rgba(23,40,30,.28);min-height:min(720px,calc(100vh - 96px))}
-  .pt-top{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:1px solid var(--line);background:#fff}
-  .pt-brand{display:flex;align-items:center;gap:14px}
-  .pt-brand img{height:30px;width:auto;display:block}
-  .pt-brand .pt-div{width:1px;height:22px;background:var(--line)}
-  .pt-brand .pt-tag{font:700 .64rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-  .pt-help{font-size:.9rem;font-weight:600;color:var(--muted);text-decoration:none}
-  .pt-help:hover{color:var(--ink)}
-  .pt-body{flex:1;display:flex;min-height:0}
-  .pt-form{flex:1.3;padding:clamp(28px,4.4vw,56px);display:flex;flex-direction:column;justify-content:center;gap:20px}
-  .pt-form .pt-h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4vw,2.8rem);line-height:1;letter-spacing:-.01em;margin:0;color:var(--ink)}
-  .pt-form .sub{color:var(--muted);font-size:.95rem;margin:-8px 0 4px}
-  .role-tabs{display:inline-flex;align-self:flex-start;background:var(--mint);border-radius:9px;padding:4px;gap:4px;margin:0}
-  .role-tab{border:none;background:none;padding:10px 22px;border-radius:6px;font-family:inherit;font-weight:700;font-size:.86rem;color:var(--muted);cursor:pointer;transition:background .15s,color .15s}
-  .role-tab.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.09)}
+  /* ---- Sign-in: "Two Doors" ---- */
+  .login{min-height:100vh;background:var(--paper)}
+  .doors-shell{min-height:100vh;display:flex;flex-direction:column}
+  .doors-top{flex:none;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:#fff;border-bottom:1px solid var(--line)}
+  .doors-brand{display:flex;align-items:center;gap:14px}
+  .doors-brand img{height:30px;width:auto;display:block}
+  .doors-brand .doors-div{width:1px;height:22px;background:var(--line)}
+  .doors-brand .doors-tag{font:700 .64rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .doors-help{font-size:.9rem;font-weight:600;color:var(--muted);text-decoration:none}
+  .doors-help:hover{color:var(--ink)}
+
+  .doors{position:relative;flex:1;display:flex;overflow:hidden}
+  .door{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+        cursor:pointer;padding:40px;text-align:center;border:none;font-family:inherit;transition:filter .15s}
+  .door.patient{background:var(--cream);color:var(--ink)}
+  .door.practitioner{background:var(--ink);color:var(--cream)}
+  .door:hover,.door:focus-visible{filter:brightness(1.05)}
+  .door:focus-visible{outline:2px solid var(--amber);outline-offset:-4px}
+  .door-ic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;flex:none}
+  .door.patient .door-ic{background:var(--sage)}
+  .door.practitioner .door-ic{background:var(--amber)}
+  .door h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,3vw,1.8rem);margin:0;letter-spacing:-.01em}
+  .door .door-tag{font:700 .68rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.62}
+
+  .doors-divider{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.16);z-index:2;pointer-events:none}
+  .doors-hint{position:absolute;left:0;right:0;bottom:26px;text-align:center;font-size:.82rem;color:var(--muted);
+              z-index:1;pointer-events:none;transition:opacity .2s}
+
+  .doors-panel{position:absolute;top:0;bottom:0;width:0;overflow:hidden;background:#fff;z-index:5;
+               box-shadow:-8px 0 40px -12px rgba(23,40,30,.3);transition:width .4s ease}
+  .doors-panel.show{width:min(560px,60%)}
+  .doors-panel-inner{width:min(560px,60vw);flex:none;height:100%;box-sizing:border-box;position:relative;
+                      display:flex;flex-direction:column;justify-content:center;gap:18px;padding:clamp(28px,4vw,52px)}
+  .doors-close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);
+               background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+  .doors-close:hover,.doors-close:focus-visible{color:var(--ink);border-color:var(--ink)}
+  .doors-close svg{width:16px;height:16px}
+  .doors-k{font:700 .68rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+  .doors-panel-inner h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1;letter-spacing:-.01em;margin:4px 0 0;color:var(--ink)}
+  .doors-panel-inner .sub{color:var(--muted);font-size:.95rem;margin:-8px 0 4px}
+
   .fld{display:flex;flex-direction:column;gap:8px}
   .fld label{font:700 .66rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
   .fld input{width:100%;border:1px solid var(--line);border-radius:4px;padding:13px 15px;font-family:inherit;font-size:1rem;background:#fff;color:var(--ink)}
   .fld input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(148,162,118,.18)}
   .login .btn{align-self:flex-start;min-width:190px;padding:14px 22px;margin-top:4px}
   .login .note{font-size:.78rem;color:var(--muted);margin:6px 0 0;line-height:1.6;max-width:44ch}
-  .pt-aside{flex:1;background:var(--ink);color:var(--cream);padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center;gap:26px}
-  .pt-aside h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,2.4vw,1.7rem);margin:0;color:#fff}
-  .pt-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px}
-  .pt-list li{display:flex;align-items:center;gap:16px;font-size:1rem;color:#c7d3c1}
-  .pt-list svg,.pt-trust svg{fill:none;stroke-linecap:round;stroke-linejoin:round}
-  .pt-list svg{flex:none;width:22px;height:22px;stroke:var(--amber);stroke-width:2}
-  .pt-trust{display:flex;flex-wrap:wrap;align-items:center;gap:14px 34px;padding:16px 26px;border-top:1px solid var(--line);background:#fff}
-  .pt-trust span{display:flex;align-items:center;gap:9px;font:700 .64rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  .pt-trust svg{width:15px;height:15px;stroke:var(--sage);stroke-width:2;flex:none}
+
   @media (max-width:760px){
-    .login{padding:38px 12px 20px}
-    .pt-body{flex-direction:column}
-    .pt-aside{display:none}
-    .pt-trust{gap:10px 20px;padding:14px 18px}
-    .pt-top{padding:14px 18px}
+    .doors-top{padding:14px 18px}
+    .doors{flex-direction:column}
+    .doors-divider{left:0;right:0;top:50%;bottom:auto;height:1px;width:auto}
+    .doors-hint{bottom:12px}
+    .doors-panel{transition:none}
+    .doors-panel.show{position:fixed;inset:0;left:0 !important;right:0 !important;width:100% !important;overflow-y:auto}
+    .doors-panel-inner{width:100%;max-width:420px;margin:0 auto;padding:40px 22px}
   }
 
   .app{display:none;grid-template-columns:230px 1fr;max-width:1240px;margin:0 auto;min-height:92vh}
@@ -265,42 +284,41 @@
   <div class="stage">
 
     <div class="login" id="login">
-      <div class="portal-shell">
-        <header class="pt-top">
-          <div class="pt-brand">
+      <div class="doors-shell">
+        <header class="doors-top">
+          <div class="doors-brand">
             <img src="../assets/itrust-logo.svg" alt="iTrust Wellness" />
-            <span class="pt-div"></span>
-            <span class="pt-tag">Patient Portal</span>
+            <span class="doors-div"></span>
+            <span class="doors-tag">Patient Portal</span>
           </div>
-          <a href="../contact.html" class="pt-help">Need help signing in?</a>
+          <a href="../contact.html" class="doors-help">Need help signing in?</a>
         </header>
-        <div class="pt-body">
-          <div class="pt-form">
-            <h1 id="li-h1" class="pt-h1">Welcome back</h1>
-            <p class="sub" id="li-sub">Your care, on the record.</p>
-            <div class="role-tabs" role="tablist" aria-label="Sign in as">
-              <button type="button" class="role-tab on" id="role-patient" role="tab" aria-selected="true">Patient</button>
-              <button type="button" class="role-tab" id="role-practitioner" role="tab" aria-selected="false">Practitioner</button>
-            </div>
-            <div class="fld"><label>Email</label><input type="email" id="li-email" value="jordan@example.com" /></div>
-            <div class="fld"><label>Password</label><input type="password" id="li-pass" value="demo-demo-demo" /></div>
-            <button class="btn primary" id="signin">Continue</button>
-            <p class="note" id="li-note">Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication.</p>
+        <div class="doors">
+          <div class="door patient" id="role-patient" role="button" tabindex="0" aria-pressed="false">
+            <div class="door-ic"><svg width="52%" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+            <h2>I'm a patient</h2>
+            <span class="door-tag">Visits &middot; messages &middot; care plan</span>
           </div>
-          <aside class="pt-aside">
-            <h2>Everything in one place</h2>
-            <ul class="pt-list">
-              <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message your care team</li>
-              <li><svg viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>See &amp; book your visits</li>
-              <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>Track your care plan</li>
-            </ul>
-          </aside>
+          <div class="door practitioner" id="role-practitioner" role="button" tabindex="0" aria-pressed="false">
+            <div class="door-ic"><svg width="52%" viewBox="0 0 24 24" fill="none" stroke="#17281e" stroke-width="2"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.3 12l1.8 1.8L15 10"/></svg></div>
+            <h2>I'm a practitioner</h2>
+            <span class="door-tag">Patients &middot; appointments &middot; charts</span>
+          </div>
+          <div class="doors-divider" aria-hidden="true"></div>
+          <span class="doors-hint" id="doors-hint">Choose a door to continue</span>
+          <div class="doors-panel" id="doors-panel">
+            <div class="doors-panel-inner">
+              <button type="button" class="doors-close" id="doors-close" aria-label="Back to door choice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+              <span class="doors-k" id="li-k">Patient sign-in</span>
+              <h1 id="li-h1">Welcome back</h1>
+              <p class="sub" id="li-sub">Your care, on the record.</p>
+              <div class="fld"><label>Email</label><input type="email" id="li-email" value="jordan@example.com" /></div>
+              <div class="fld"><label>Password</label><input type="password" id="li-pass" value="demo-demo-demo" /></div>
+              <button class="btn primary" id="signin">Continue</button>
+              <p class="note" id="li-note">Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication.</p>
+            </div>
+          </div>
         </div>
-        <footer class="pt-trust">
-          <span><svg viewBox="0 0 24 24" stroke="currentColor"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>256-bit encryption</span>
-          <span><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.3 12l1.8 1.8L15 10"/></svg>HIPAA compliant</span>
-          <span><svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.4l2.4 2.4 4.6-5.2"/></svg>Confidential by design</span>
-        </footer>
       </div>
     </div>
 
@@ -712,20 +730,34 @@
   function enterApp(){$("login").style.display="none";$("app").classList.add("on");render("dashboard");}
   var LOGIN_ROLE="patient";
   var ROLE_COPY={
-    patient:{h1:"Welcome back",sub:"Your care, on the record.",email:"jordan@example.com",pass:"demo-demo-demo",note:"Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication."},
-    practitioner:{h1:"Staff sign in",sub:"Provider &amp; care team access.",email:"dr.rivera@itrustwellness.com",pass:"staff-demo-2026",note:"Demo staff login — no real account. Click <strong>Continue</strong> to open the provider dashboard. A live version would require verified staff credentials, separate from patient sign-in."}
+    patient:{k:"Patient sign-in",h1:"Welcome back",sub:"Your care, on the record.",email:"jordan@example.com",pass:"demo-demo-demo",note:"Demo login — no real account. Click <strong>Continue</strong> to explore. A live version would use secure, HIPAA-compliant authentication."},
+    practitioner:{k:"Practitioner sign-in",h1:"Staff sign in",sub:"Provider &amp; care team access.",email:"dr.rivera@itrustwellness.com",pass:"staff-demo-2026",note:"Demo staff login — no real account. Click <strong>Continue</strong> to open the provider dashboard. A live version would require verified staff credentials, separate from patient sign-in."}
   };
   function setLoginRole(role){
     LOGIN_ROLE=role;
     var c=ROLE_COPY[role];
+    $("li-k").textContent=c.k;
     $("li-h1").textContent=c.h1; $("li-sub").innerHTML=c.sub; $("li-note").innerHTML=c.note;
     $("li-email").value=c.email; $("li-pass").value=c.pass;
     var pt=$("role-patient"), pr=$("role-practitioner");
-    pt.classList.toggle("on",role==="patient"); pt.setAttribute("aria-selected",role==="patient");
-    pr.classList.toggle("on",role==="practitioner"); pr.setAttribute("aria-selected",role==="practitioner");
+    pt.setAttribute("aria-pressed",role==="patient");
+    pr.setAttribute("aria-pressed",role==="practitioner");
+    var panel=$("doors-panel"), hint=$("doors-hint");
+    if(role==="patient"){panel.style.left="0";panel.style.right="auto";}
+    else{panel.style.right="0";panel.style.left="auto";}
+    panel.classList.add("show");
+    hint.style.opacity="0";
   }
+  function doorKey(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();this.click();}}
   $("role-patient").addEventListener("click",function(){setLoginRole("patient");});
   $("role-practitioner").addEventListener("click",function(){setLoginRole("practitioner");});
+  $("role-patient").addEventListener("keydown",doorKey);
+  $("role-practitioner").addEventListener("keydown",doorKey);
+  $("doors-close").addEventListener("click",function(e){
+    e.stopPropagation();
+    $("doors-panel").classList.remove("show");
+    $("doors-hint").style.opacity="1";
+  });
   $("signin").addEventListener("click",function(){
     if(LOGIN_ROLE==="practitioner"){
       try{localStorage.setItem("itrust-demo-session","1");}catch(e){}
