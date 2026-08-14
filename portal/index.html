@@ -228,6 +228,23 @@
   .fld2{margin:12px 0}
   .fld2 label{display:block;margin-bottom:6px;font:700 .64rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
   .fld2 input{width:100%;border:1px solid var(--line);border-radius:3px;padding:10px 12px;font-family:inherit}
+  /* ---- Profile: identity rail ---- */
+  .profile-shell{max-width:760px;margin:0 auto;border-radius:6px;overflow:hidden;border:1px solid var(--line);display:flex;background:#fff}
+  .profile-rail{flex:none;width:240px;background:var(--ink);color:var(--cream);padding:34px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+  .profile-rail .avatar{width:88px;height:88px;font-size:1.8rem;background:var(--sage)}
+  .profile-rail h2{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:8px 0 0;letter-spacing:-.01em}
+  .profile-rail .since{font:600 .7rem/1 var(--mono);letter-spacing:.05em;color:#9fb0a4}
+  .profile-rail .pill{margin-top:4px;font:700 .62rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--amber);border-radius:999px;padding:5px 12px}
+  .profile-fields{flex:1;min-width:0;padding:34px 36px;display:flex;flex-direction:column;gap:20px}
+  .uline{display:flex;flex-direction:column;gap:6px;border-bottom:1.5px solid var(--ink);padding-bottom:10px}
+  .uline.dim{border-color:var(--line)}
+  .uline label{font:700 .64rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .uline input{border:none;background:none;font-family:inherit;font-size:1rem;color:var(--ink);padding:0;width:100%}
+  .uline input:focus{outline:none}
+  @media (max-width:640px){
+    .profile-shell{flex-direction:column}
+    .profile-rail{width:auto}
+  }
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:3px;font-weight:600;font-size:.9rem;opacity:0;transition:opacity .2s;z-index:300}
   .toast.show{opacity:1}
   h2.sec{font-size:.72rem;font-family:var(--mono);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px}
@@ -661,13 +678,27 @@
     },
     profile:function(){
       var p=DATA.patient;
-      return '<div class="card" style="max-width:520px;margin:0 auto">'+[["First name",p.first],["Email",p.email],["Phone",p.phone],["Plan",p.plan],["Member ID",p.member]].map(function(f){return '<div class="fld2"><label>'+f[0]+'</label><input value="'+f[1]+'" /></div>';}).join("")+'<button class="btn primary" style="margin-top:6px" data-act="save">Save changes</button></div>'+
-        '<p class="muted" style="font-size:.78rem;margin-top:10px;text-align:center">Sample profile, no real identifiers stored.</p>';
+      var initial=String(ACCOUNT.name||p.first||"?").charAt(0);
+      return '<div class="profile-shell">'+
+          '<div class="profile-rail">'+
+            '<div class="avatar editable-av" id="profileAvatar" data-act="avatar" title="Change photo">'+initial+'</div>'+
+            '<h2>'+p.first+'</h2>'+
+            '<span class="since">Member since Jun 2026</span>'+
+            '<span class="pill">Active</span>'+
+          '</div>'+
+          '<div class="profile-fields">'+
+            [["First name",p.first],["Email",p.email],["Phone",p.phone]].map(function(f){return '<div class="uline"><label>'+f[0]+'</label><input value="'+f[1]+'" /></div>';}).join("")+
+            [["Plan",p.plan],["Member ID",p.member]].map(function(f){return '<div class="uline dim"><label>'+f[0]+'</label><input value="'+f[1]+'" /></div>';}).join("")+
+            '<button class="btn primary" style="align-self:flex-start;margin-top:4px" data-act="save">Save changes</button>'+
+          '</div>'+
+        '</div>'+
+        '<p class="muted" style="font-size:.78rem;margin-top:14px;text-align:center">Sample profile, no real identifiers stored.</p>';
     }
   };
 
   function render(view,arg){
     $("content").innerHTML=VIEWS[view](arg);
+    if(view==="profile")reapplyAvatars();
     $("hiTitle").textContent=TITLES[view]||"Messages";
     if(view==="dashboard")$("hiTitle").textContent="Welcome, "+DATA.patient.first;
     $("hiDate").textContent = view==="dashboard" ? "A quick overview" : "";
@@ -700,6 +731,7 @@
     if(el.dataset.act==="msg"){render("compose");return;}
     if(el.dataset.act==="checkin"){render("checkin");return;}
     if(el.dataset.act==="refill"){render("refill");return;}
+    if(el.dataset.act==="avatar"){pickPhoto(ACCOUNT.email,reapplyAvatars);return;}
     if(el.dataset.act==="doc-upload"){document.getElementById("doc-input").click();return;}
     if(el.dataset.act==="msg-send"){var to=(document.getElementById("cf-to")||{}).value||"Dr. Rivera";var tp=(document.getElementById("cf-topic")||{}).value||"";var m=(document.getElementById("cf-msg")||{}).value||"";if(!m.trim()){toast("Write a message first");return;}DATA.threads.unshift({who:to,unread:false,msgs:[{f:"me",t:(tp?tp+": ":"")+m}]});toast("Message sent ✓");render("messages");return;}
     if(el.dataset.act==="cin-submit"){
@@ -778,7 +810,7 @@
   function avKey(id){return "itrust-avatar::"+String(id||"").toLowerCase();}
   function getAv(id){try{return localStorage.getItem(avKey(id))||"";}catch(e){return "";}}
   function applyAv(el,id,initial){if(!el)return;var d=getAv(id);if(d){el.style.backgroundImage="url("+d+")";el.textContent="";}else{el.style.backgroundImage="";el.textContent=initial;}}
-  function reapplyAvatars(){var i=String(ACCOUNT.name||"?").charAt(0);applyAv(document.getElementById("topAvatar"),ACCOUNT.email,i);applyAv(document.querySelector('.side .me .avatar'),ACCOUNT.email,i);}
+  function reapplyAvatars(){var i=String(ACCOUNT.name||"?").charAt(0);applyAv(document.getElementById("topAvatar"),ACCOUNT.email,i);applyAv(document.querySelector('.side .me .avatar'),ACCOUNT.email,i);applyAv(document.getElementById("profileAvatar"),ACCOUNT.email,i);}
   var _avT=null;
   function pickPhoto(id,cb){_avT={id:id,cb:cb};var inp=document.getElementById("av-input");inp.value="";inp.click();}
   document.getElementById("av-input").addEventListener("change",function(){var f=this.files&&this.files[0];if(!f||!_avT)return;if(f.size>2500000){toast("Please choose an image under about 2 MB for this demo.");return;}var r=new FileReader();r.onload=function(){try{localStorage.setItem(avKey(_avT.id),r.result);}catch(e){toast("That image is too large for demo storage.");return;}if(_avT.cb)_avT.cb();toast("Photo updated ✓");};r.readAsDataURL(f);});
