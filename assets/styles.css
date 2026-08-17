@@ -231,8 +231,10 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .method-more{display:inline-block;margin-top:14px;font-weight:700;font-size:.92rem;color:var(--sage)}
 
 /* ---------- legal pages (privacy, terms) ---------- */
-.legal-media .hero-photo-frame img{min-height:370px;max-height:370px}
-.legal{max-width:760px}
+.legal-hero .page-hero-copy{max-width:760px;margin:0 auto;text-align:center}
+.legal-hero .page-hero-copy h1{max-width:none}
+.legal-hero .page-hero-copy p{margin-left:auto;margin-right:auto}
+.legal{max-width:760px;margin:0 auto}
 .legal h2{font-size:1.5rem;color:var(--evergreen);margin:38px 0 12px}
 .legal h2:first-child{margin-top:0}
 .legal p{color:var(--muted);line-height:1.75;margin-bottom:14px}
@@ -525,7 +527,6 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   .page-hero-media{order:-1}
   .logo-panel{min-height:200px;padding:36px}
   .hero-photo-frame img{min-height:240px;max-height:320px}
-  .legal-media .hero-photo-frame img{min-height:240px;max-height:300px}
   /* mega-menu collapses on mobile; the Treatments link just navigates */
   .mega{display:none}
   .caret{display:none}
