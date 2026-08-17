@@ -230,6 +230,18 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .method-card[role="button"]:focus-visible{outline:2px solid var(--sage);outline-offset:3px}
 .method-more{display:inline-block;margin-top:14px;font-weight:700;font-size:.92rem;color:var(--sage)}
 
+/* ---------- legal pages (privacy, terms) ---------- */
+.legal{max-width:760px}
+.legal h2{font-size:1.5rem;color:var(--evergreen);margin:38px 0 12px}
+.legal h2:first-child{margin-top:0}
+.legal p{color:var(--muted);line-height:1.75;margin-bottom:14px}
+.legal ul{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:12px}
+.legal li{position:relative;padding-left:22px;color:var(--muted);line-height:1.7}
+.legal li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--mint-deep)}
+.legal strong{color:var(--evergreen)}
+.legal a{color:var(--sage);font-weight:600}
+.legal-contact{background:#fff;border:1px solid rgba(20,58,43,.1);border-radius:14px;padding:16px 20px;line-height:1.9}
+
 /* ---------- trust strip ---------- */
 .trust-strip{padding:30px 0;border-top:1px solid rgba(20,58,43,.07);border-bottom:1px solid rgba(20,58,43,.07)}
 .trust-label{text-align:center;font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
