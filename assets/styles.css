@@ -427,6 +427,11 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .info-card.dark li::before{color:var(--amber)}
 
 .section-pad{padding:80px 0}
+/* Contact page only: close the gap between the hero and the form. .page-hero
+   and .section-pad are shared, so this is scoped to the two classes added on
+   contact.html and leaves every other page's spacing alone. */
+.contact-lead{padding-bottom:5px}
+.contact-body{padding-top:5px}
 
 /* ---------- contact form ---------- */
 .contact-form{display:flex;flex-direction:column;gap:16px}
