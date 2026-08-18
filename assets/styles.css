@@ -93,6 +93,7 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .section-lead{font-size:1.12rem;color:var(--muted);max-width:640px;margin-top:16px}
 .section-lead.center{margin-left:auto;margin-right:auto;text-align:center}
 .section-lead.wide{max-width:720px}
+.pillars-lead{margin-top:20px}
 .section-lead.light{color:rgba(255,255,255,.85)}
 
 /* ---------- crisis bar ---------- */
@@ -616,7 +617,7 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 @media(max-width:560px){.sc-card{padding:26px 22px}.sc-q{font-size:1.2rem}}
 
 /* ===== Home "care designed to thrive" pillar cards (replaced the tabs) ===== */
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
 .pillar{background:var(--white);border:1px solid rgba(20,58,43,.1);border-radius:22px;padding:30px 26px;display:flex;flex-direction:column}
 .pillar-ic{width:54px;height:54px;border-radius:15px;background:var(--mint);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
 .pillar-ic svg{width:27px;height:27px;stroke:var(--forest);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
