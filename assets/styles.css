@@ -232,6 +232,34 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .method-card[role="button"]:focus-visible{outline:2px solid var(--sage);outline-offset:3px}
 .method-more{display:inline-block;margin-top:14px;font-weight:700;font-size:.92rem;color:var(--sage)}
 
+/* ---------- sticky quick actions (phones only) ----------
+   Booking here is a phone call, and on a phone the header CTA is behind the
+   menu toggle. This keeps calling one tap away from any page. Sits below the
+   modals (z-index 200+) so it never covers a dialog. */
+.quick-bar{display:none}
+@media (max-width:760px){
+  .quick-bar{
+    display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:190;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
+    background:rgba(245,247,241,.97);
+    border-top:1px solid rgba(20,58,43,.12);
+    box-shadow:0 -8px 24px -12px rgba(20,58,43,.35);
+  }
+  @supports (backdrop-filter:blur(8px)){
+    .quick-bar{background:rgba(245,247,241,.86);backdrop-filter:blur(8px)}
+  }
+  .quick-bar a{
+    flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border-radius:999px;padding:13px 12px;font-weight:700;font-size:.95rem;
+    text-decoration:none;line-height:1;white-space:nowrap;
+  }
+  .quick-call{background:var(--evergreen);color:#fff}
+  .quick-alt{background:transparent;border:1.5px solid var(--evergreen);color:var(--evergreen)}
+  .quick-bar svg{width:17px;height:17px;stroke:currentColor;stroke-width:2;fill:none;flex:none}
+  /* keep the bar from covering the end of the page */
+  body{padding-bottom:78px}
+}
+
 /* ---------- legal pages (privacy, terms) ---------- */
 .legal-hero .page-hero-copy{max-width:760px;margin:0 auto;text-align:center}
 .legal-hero .page-hero-copy h1{max-width:none}
