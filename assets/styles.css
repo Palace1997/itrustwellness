@@ -368,7 +368,6 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .foot-loc svg{width:18px;height:18px;flex:none;margin-top:2px;fill:none;stroke:var(--amber);stroke-width:1.7}
 .foot-loc b{color:#fff;font-weight:700;font-size:.95rem;display:block;margin-bottom:2px}
 .foot-loc span{color:var(--footdim,#aebfa8);font-size:.86rem}
-.foot-loc-flag{display:inline-block;margin-left:8px;font:700 .58rem/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--evergreen);background:var(--amber);padding:3px 7px;border-radius:5px;vertical-align:middle}
 
 .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:.86rem;color:var(--footdim,#aebfa8)}
 .foot-nav{display:flex;flex-wrap:wrap;gap:8px 22px}
