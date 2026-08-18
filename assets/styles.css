@@ -243,7 +243,6 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .legal li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--mint-deep)}
 .legal strong{color:var(--evergreen)}
 .legal a{color:var(--sage);font-weight:600}
-.legal-contact{background:#fff;border:1px solid rgba(20,58,43,.1);border-radius:14px;padding:16px 20px;line-height:1.9}
 
 /* ---------- trust strip ---------- */
 .trust-strip{padding:30px 0;border-top:1px solid rgba(20,58,43,.07);border-bottom:1px solid rgba(20,58,43,.07)}
