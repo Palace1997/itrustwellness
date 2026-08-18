@@ -164,19 +164,16 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .stat-list strong{font-size:1.15rem}
 .stat-foot{font-size:.72rem;color:var(--forest);margin-top:18px;opacity:.8}
 
-/* ---------- insurance / payment (rotating 3D ring) ---------- */
+/* ---------- insurance / payment ---------- */
 .eyebrow.center{text-align:center}
 .pay-section{padding:74px 0 64px;background:var(--cream);overflow:hidden}
-.pay-ring-scene{height:210px;perspective:1100px;margin-top:30px}
-.pay-ring{position:relative;width:172px;height:100px;margin:55px auto 0;transform-style:preserve-3d;animation:pay-spin var(--pay-dur,40s) linear infinite}
-.pay-ring-item{position:absolute;inset:0;background:#fff;border:1px solid rgba(20,58,43,.1);border-radius:16px;display:grid;place-items:center;box-shadow:0 12px 28px -18px rgba(20,58,43,.55)}
-.pay-logo{height:54px;width:auto;object-fit:contain}
-@keyframes pay-spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
-.pay-list{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;margin-top:18px;padding:0}
-.pay-list li{font-weight:700;color:var(--forest);opacity:.7;font-size:.92rem}
+/* Six carriers across on desktop, so the row reads as one band of logos.
+   Doubled selector so it outranks the plain .ins-logos grid defined later. */
+.ins-logos.pay-logos{grid-template-columns:repeat(6,1fr);margin-top:34px}
+@media (max-width:900px){.ins-logos.pay-logos{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.ins-logos.pay-logos{grid-template-columns:repeat(2,1fr)}}
 .pay-note{text-align:center;color:var(--muted);margin-top:26px}
 .pay-note a{color:var(--forest);font-weight:700;text-decoration:underline}
-@media (prefers-reduced-motion:reduce){.pay-ring{animation:none}}
 
 /* ---------- payment options trigger + modal ---------- */
 .pay-cta-wrap{text-align:center;margin-top:30px}
