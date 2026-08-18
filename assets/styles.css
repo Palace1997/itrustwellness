@@ -46,6 +46,9 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+/* A hand-placed line break for wide screens only. Narrow screens have their own
+   natural wrap, and forcing this one there just strands a short line. */
+@media (max-width:760px){br.br-wide{display:none}}
 /* Off-screen until focused, then it lands top-left over the header. Fixed, not
    absolute, so it is still on screen if someone tabs in after scrolling. */
 .skip-link{position:fixed;left:-9999px;top:0;z-index:300;background:var(--evergreen);color:#fff;
