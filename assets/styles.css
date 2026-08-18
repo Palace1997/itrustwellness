@@ -346,11 +346,7 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 
 /* ---------- footer (Practice Card: contact-first) ---------- */
 .site-footer{background:var(--evergreen);color:#dfe7dd;padding:0 0 26px}
-.foot-crisis{background:var(--forest);padding:13px 0;text-align:center;font-size:.9rem;color:#dfe7dd}
-.foot-crisis a{color:var(--amber);font-weight:700;text-decoration:none}
-.foot-crisis a:hover{text-decoration:underline}
-
-.foot-grid{display:grid;grid-template-columns:1.15fr 1fr 1.2fr;gap:44px;padding:48px 0 8px}
+.foot-grid{display:grid;grid-template-columns:1.15fr 1fr 1.2fr;gap:44px;padding:52px 0 8px}
 .brand-foot{display:inline-block;margin-bottom:18px}
 .foot-blurb{margin:0 0 20px;color:var(--footdim,#aebfa8);font-size:.93rem;line-height:1.6;max-width:34ch}
 .socials{display:flex;gap:10px}
