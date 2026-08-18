@@ -435,6 +435,11 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 /* About page: same scoped tightening between the hero and the mission section. */
 .about-lead{padding-bottom:0}
 .about-body{padding-top:60px}
+/* Partners and Locations: same hero-to-body tightening, scoped per page. */
+.partners-lead{padding-bottom:0}
+.partners-body{padding-top:40px}
+.locations-lead{padding-bottom:0}
+.locations-body{padding-top:40px}
 
 /* ---------- contact form ---------- */
 .contact-form{display:flex;flex-direction:column;gap:16px}
