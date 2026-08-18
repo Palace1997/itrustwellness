@@ -101,23 +101,23 @@ nav: home
     </div>
   </section>
 
-  <!-- ============ INSURANCE / PAYMENT ============ -->
+  <!-- ============ INSURANCE / PAYMENT (rotating 3D ring) ============ -->
   <section class="pay-section" id="insurance">
     <div class="container">
       <p class="eyebrow center">Insurance &amp; payment</p>
       <h2 class="section-title center">We're in-network with the plans you already have</h2>
-      <!-- Static row. This was a spinning 3D ring, which showed the carriers'
-           marks edge-on and squashed (Humana rendered 20px wide mid-rotation).
-           Insurer logos are trust signals, so they are shown level and legible.
-           The alt text carries the names, which is why the duplicate text list
-           underneath is gone. -->
-      <div class="ins-logos pay-logos">
-        <div class="ins-logo-card"><img src="assets/insurers/blue-cross-blue-shield-1.png" alt="Blue Cross Blue Shield" loading="lazy" /></div>
-        <div class="ins-logo-card"><img src="assets/insurers/United-Healthcare-1.png" alt="United Healthcare" loading="lazy" /></div>
-        <div class="ins-logo-card"><img src="assets/insurers/aetna-1.png" alt="Aetna" loading="lazy" /></div>
-        <div class="ins-logo-card"><img src="assets/insurers/Cigna-1.png" alt="Cigna" loading="lazy" /></div>
-        <div class="ins-logo-card"><img src="assets/insurers/Humumana-2.png" alt="Humana" loading="lazy" /></div>
-        <div class="ins-logo-card"><img src="assets/insurers/allegiance-1.png" alt="Allegiance" loading="lazy" /></div>
+      <!-- Rotating ring, kept because it is a nice touch. Not aria-hidden this
+           time: the alt text below is what screen readers read, which is why
+           there is no longer a duplicate text list underneath. -->
+      <div class="pay-ring-scene">
+        <div class="pay-ring">
+          <div class="pay-ring-item" style="transform:rotateY(0deg) translateZ(250px)"><img class="pay-logo" src="assets/insurers/allegiance-1.png" alt="Allegiance" /></div>
+          <div class="pay-ring-item" style="transform:rotateY(60deg) translateZ(250px)"><img class="pay-logo" src="assets/insurers/Humumana-2.png" alt="Humana" /></div>
+          <div class="pay-ring-item" style="transform:rotateY(120deg) translateZ(250px)"><img class="pay-logo" src="assets/insurers/blue-cross-blue-shield-1.png" alt="Blue Cross Blue Shield" /></div>
+          <div class="pay-ring-item" style="transform:rotateY(180deg) translateZ(250px)"><img class="pay-logo" src="assets/insurers/United-Healthcare-1.png" alt="United Healthcare" /></div>
+          <div class="pay-ring-item" style="transform:rotateY(240deg) translateZ(250px)"><img class="pay-logo" src="assets/insurers/aetna-1.png" alt="Aetna" /></div>
+          <div class="pay-ring-item" style="transform:rotateY(300deg) translateZ(250px)"><img class="pay-logo" src="assets/insurers/Cigna-1.png" alt="Cigna" /></div>
+        </div>
       </div>
       <p class="pay-note">Don't see your plan? <a href="patients.html#book">Reach out</a>, we'll help you check your coverage and payment options.</p>
       <div class="pay-cta-wrap">
