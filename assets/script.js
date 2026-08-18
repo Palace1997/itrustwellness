@@ -17,14 +17,63 @@ document.querySelectorAll('.main-nav a').forEach(link => {
   });
 });
 
-// --- Contact form (front-end stub) ---
+// --- Contact form (posts to Formspree) ---
+// Paste the form id from the Formspree dashboard here. The endpoint it gives
+// you looks like https://formspree.io/f/abcdwxyz, and the id is that last part.
+// Until this is set, the form refuses to pretend it sent anything and points
+// people at the phone instead.
+const FORMSPREE_ID = 'PASTE_FORM_ID_HERE';
+
 const contact = document.querySelector('.contact-form');
 if (contact) {
+  const status = contact.querySelector('.form-status');
+  const button = contact.querySelector('button[type="submit"]');
+  const connected = /^[a-zA-Z0-9]{6,}$/.test(FORMSPREE_ID);
+  const callInstead = 'Please call 864-520-2020 and we’ll help you right away.';
+
+  if (connected) {
+    contact.setAttribute('action', 'https://formspree.io/f/' + FORMSPREE_ID);
+    contact.setAttribute('method', 'POST');
+  }
+
   contact.addEventListener('submit', (e) => {
     e.preventDefault();
-    const status = contact.querySelector('.form-status');
-    contact.reset();
-    if (status) status.textContent = 'Thank you for reaching out — we’ll be in touch soon.';
+
+    // the form carries novalidate so we can word the message ourselves
+    if (!contact.checkValidity()) {
+      status.textContent = 'Please add your name and a valid email so we can reply.';
+      const firstInvalid = contact.querySelector(':invalid');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    if (!connected) {
+      status.textContent = 'This form isn’t connected yet. ' + callInstead;
+      return;
+    }
+
+    const label = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    status.textContent = '';
+
+    fetch(contact.getAttribute('action'), {
+      method: 'POST',
+      body: new FormData(contact),
+      headers: { Accept: 'application/json' }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Formspree returned ' + res.status);
+        contact.reset();
+        status.textContent = 'Thank you, your message is on its way. We’ll be in touch soon.';
+      })
+      .catch(() => {
+        status.textContent = 'That didn’t send. ' + callInstead;
+      })
+      .finally(() => {
+        button.disabled = false;
+        button.textContent = label;
+      });
   });
 }
 
@@ -191,14 +240,3 @@ if (document.querySelector('a[href$="treatments.html#methods"], .method-card')) 
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeTx(); });
 }
 
-// --- Newsletter (front-end stub) ---
-const news = document.querySelector('.newsletter');
-if (news) {
-  news.addEventListener('submit', () => {
-    const input = news.querySelector('input');
-    if (input.value) {
-      input.value = '';
-      input.placeholder = 'Thank you — you’re subscribed!';
-    }
-  });
-}

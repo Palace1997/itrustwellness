@@ -29,6 +29,9 @@ nav: contact
           <h3>Send us a message</h3>
           <p>We'll respond as soon as we can during business hours.</p>
           <form class="contact-form" novalidate>
+            <!-- Formspree: _subject titles the email, _gotcha is its honeypot -->
+            <input type="hidden" name="_subject" value="Website contact form" />
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
             <div class="field">
               <label for="cf-name">First name</label>
               <input id="cf-name" name="name" type="text" autocomplete="given-name" placeholder="Your first name" required />
