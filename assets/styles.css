@@ -411,6 +411,10 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 /* ---------- split / info cards ---------- */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
 .info-card{background:var(--mint);border-radius:var(--radius);padding:36px 32px}
+/* FAQ only: tighten the vertical spacing so the six Q&As read as a list, not
+   six far-apart blocks. Scoped to #faq so info-cards elsewhere keep 36px. */
+#faq .split{row-gap:25px;column-gap:40px}
+#faq .info-card{padding-top:10px;padding-bottom:10px}
 .info-card.amber{background:var(--amber)}
 .info-card.dark{background:var(--evergreen);color:#fff}
 .info-card.dark h3,.info-card.dark p{color:#fff}
