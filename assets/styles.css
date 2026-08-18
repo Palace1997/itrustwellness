@@ -92,6 +92,7 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .section-title.light{color:#fff}
 .section-lead{font-size:1.12rem;color:var(--muted);max-width:640px;margin-top:16px}
 .section-lead.center{margin-left:auto;margin-right:auto;text-align:center}
+.section-lead.wide{max-width:720px}
 .section-lead.light{color:rgba(255,255,255,.85)}
 
 /* ---------- crisis bar ---------- */
