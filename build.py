@@ -23,6 +23,11 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
 PAGES_DIR = os.path.join(SRC, "pages")
 
+# Canonical origin for <link rel="canonical">, og:url, and sitemap.xml.
+# ---> CHANGE THIS ONE LINE when the custom domain goes live, i.e. to
+#      "https://itrustwellness.com/". Everything else follows from it.
+SITE_URL = "https://palace1997.github.io/itrustwellness/"
+
 # ---------------------------------------------------------------------------
 # CONDITIONS, the single source of truth for the treatments section.
 # Each condition generates condition-<slug>.html and appears in the sidebar,
@@ -243,6 +248,11 @@ def approach_items(c):
     return "\n".join(out)
 
 
+def canonical_for(name):
+    """index.html canonicalises to the directory root, everything else to itself."""
+    return SITE_URL if name == "index.html" else SITE_URL + name
+
+
 def build():
     base = read(os.path.join(SRC, "templates", "base.html"))
     cond_tpl = read(os.path.join(SRC, "templates", "condition.html"))
@@ -258,6 +268,7 @@ def build():
         meta, body = parse_front_matter(read(os.path.join(PAGES_DIR, name)))
         html = (
             base
+            .replace("{{CANONICAL}}", canonical_for(name))
             .replace("{{TITLE}}", meta.get("title", "iTrust Wellness"))
             .replace("{{DESC}}", meta.get("desc", ""))
             .replace("{{HEADER}}", activate_nav(header, meta.get("nav", "")))
@@ -312,6 +323,7 @@ def build():
         )
         html = (
             base
+            .replace("{{CANONICAL}}", canonical_for(f'condition-{c["slug"]}.html'))
             .replace("{{TITLE}}", f'{c["name"]} Treatment | iTrust Wellness')
             .replace("{{DESC}}", f'{c["name"]}: {c["tagline"]} Compassionate, personalized psychiatric care across South Carolina.')
             .replace("{{HEADER}}", activate_nav(header, "treatments"))
@@ -320,6 +332,20 @@ def build():
         )
         write(os.path.join(ROOT, f'condition-{c["slug"]}.html'), html)
         built.append(f'condition-{c["slug"]}.html')
+
+    # --- sitemap.xml + robots.txt (generated so they cannot drift from the pages) ---
+    urls = [canonical_for(n) for n in built]
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for u in sorted(urls):
+        # the homepage is the entry point, so it gets the higher priority
+        priority = "1.0" if u == SITE_URL else "0.7"
+        sitemap.append("  <url><loc>%s</loc><priority>%s</priority></url>" % (u, priority))
+    sitemap.append("</urlset>")
+    write(os.path.join(ROOT, "sitemap.xml"), "\n".join(sitemap) + "\n")
+
+    write(os.path.join(ROOT, "robots.txt"),
+          "User-agent: *\nAllow: /\n\nSitemap: %ssitemap.xml\n" % SITE_URL)
 
     print("Built %d page(s):" % len(built))
     for name in built:

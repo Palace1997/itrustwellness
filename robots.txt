@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://palace1997.github.io/itrustwellness/sitemap.xml
