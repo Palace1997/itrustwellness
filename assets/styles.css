@@ -541,7 +541,9 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   .hero-photo{min-height:300px}
   .hero .home-hero-grid{grid-template-columns:1fr;gap:30px;padding:0 24px}
   .home-hero-copy{padding:0}
-  .home-hero-media{order:-1;flex-direction:column}
+  /* Copy leads on phones. The photo used to sit above it, which pushed the
+     headline to 730px and the first button past 1100px on a 375px screen. */
+  .home-hero-media{flex-direction:column}
   .home-hero-media .hero-photo-frame{border-radius:var(--radius-lg)}
   .home-hero-media .hero-photo-frame img{min-height:300px;max-height:380px}
   .hero-badge,.home-hero-media .hero-badge{position:static;max-width:none;margin:-46px 18px 0;left:auto;bottom:auto}
@@ -553,7 +555,8 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   .contact-grid>.info-card,.contact-grid>.contact-side{order:0}
   .quote-grid{grid-template-columns:1fr}
   .page-hero-grid{grid-template-columns:1fr;gap:30px}
-  .page-hero-media{order:-1}
+  /* same reasoning as the home hero: heading before photo on phones */
+  .page-hero-media{order:0}
   .logo-panel{min-height:200px;padding:36px}
   .hero-photo-frame img{min-height:240px;max-height:320px}
   /* mega-menu collapses on mobile; the Treatments link just navigates */
