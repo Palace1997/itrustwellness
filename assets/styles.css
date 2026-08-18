@@ -344,30 +344,41 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 @media(min-width:761px){.cta-band h2.cta-oneline{white-space:nowrap}}
 .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
 
-/* ---------- footer ---------- */
-.site-footer{background:var(--evergreen);color:#EAF6EF;padding:60px 0 30px}
-.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:30px}
-.brand-foot{font-size:1.5rem;margin-bottom:22px}
-.foot-brand h3{font-size:1.4rem;margin-bottom:14px;color:#fff}
-.newsletter{display:flex;align-items:center;border-bottom:2px solid rgba(255,255,255,.5);max-width:340px}
-.newsletter input{flex:1;border:0;background:transparent;padding:10px 4px;font-family:inherit;font-size:1rem;color:#fff}
-.newsletter input::placeholder{color:rgba(255,255,255,.6)}
-.newsletter input:focus{outline:none}
-.newsletter button{background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--amber);padding:6px}
-.foot-fine{font-size:.82rem;color:rgba(255,255,255,.7);margin-top:14px;max-width:340px}
-.socials{display:flex;gap:10px;margin-top:22px}
-.socials a{width:40px;height:40px;border:2px solid rgba(255,255,255,.4);border-radius:12px;display:grid;place-items:center;font-weight:800;color:#EAF6EF;transition:.2s}
-.socials a svg{width:18px;height:18px;fill:currentColor}
-.socials a:hover{background:var(--amber);color:var(--evergreen);border-color:var(--amber)}
-.foot-col h4{font-size:1.05rem;margin-bottom:16px;font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:#fff}
-.foot-col a{display:block;padding:6px 0;color:rgba(255,255,255,.8);font-weight:500;transition:.18s}
-.foot-col a:hover{color:var(--amber);padding-left:4px}
+/* ---------- footer (Practice Card: contact-first) ---------- */
+.site-footer{background:var(--evergreen);color:#dfe7dd;padding:0 0 26px}
+.foot-crisis{background:var(--forest);padding:13px 0;text-align:center;font-size:.9rem;color:#dfe7dd}
+.foot-crisis a{color:var(--amber);font-weight:700;text-decoration:none}
+.foot-crisis a:hover{text-decoration:underline}
 
-.foot-badges{display:flex;flex-wrap:wrap;gap:14px;margin-top:50px;padding-top:26px;border-top:1px solid rgba(255,255,255,.18)}
-.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.85rem;color:#EAF6EF}
-.badge svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;flex:none}
-.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:26px;font-size:.88rem;color:rgba(255,255,255,.75)}
-.foot-bottom a{text-decoration:underline;color:rgba(255,255,255,.92)}
+.foot-grid{display:grid;grid-template-columns:1.15fr 1fr 1.2fr;gap:44px;padding:48px 0 8px}
+.brand-foot{display:inline-block;margin-bottom:18px}
+.foot-blurb{margin:0 0 20px;color:var(--footdim,#aebfa8);font-size:.93rem;line-height:1.6;max-width:34ch}
+.socials{display:flex;gap:10px}
+.socials a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06);color:#cdd8ca;transition:.18s}
+.socials a svg{width:17px;height:17px;fill:currentColor}
+.socials a:hover{background:var(--amber);color:var(--evergreen)}
+
+.site-footer h4{font:800 1.05rem/1.2 "Plus Jakarta Sans",sans-serif;color:#fff;margin:0 0 16px}
+
+.reach-list{display:flex;flex-direction:column;gap:14px}
+.reach-lbl{display:block;margin-bottom:4px;font-size:.72rem;color:var(--footdim,#aebfa8);letter-spacing:.08em;text-transform:uppercase}
+.reach-big{font-family:var(--font-display);font-weight:600;font-size:1.5rem;color:#fff;text-decoration:none}
+.reach-big:hover{color:var(--amber)}
+.reach-list span{color:#dfe7dd}
+.reach-hours{color:var(--footdim,#aebfa8);font-size:.92rem;line-height:1.7}
+
+.loc-list{display:grid;gap:15px}
+.foot-loc{display:flex;gap:12px;align-items:flex-start}
+.foot-loc svg{width:18px;height:18px;flex:none;margin-top:2px;fill:none;stroke:var(--amber);stroke-width:1.7}
+.foot-loc b{color:#fff;font-weight:700;font-size:.95rem;display:block;margin-bottom:2px}
+.foot-loc span{color:var(--footdim,#aebfa8);font-size:.86rem}
+.foot-loc-flag{display:inline-block;margin-left:8px;font:700 .58rem/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--evergreen);background:var(--amber);padding:3px 7px;border-radius:5px;vertical-align:middle}
+
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:.86rem;color:var(--footdim,#aebfa8)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.foot-nav a{color:var(--footdim,#aebfa8);font-weight:600;text-decoration:none;transition:.16s}
+.foot-nav a:hover{color:#fff}
+.foot-copy{color:var(--footdim,#aebfa8)}
 
 /* ---------- sub-page hero ---------- */
 .page-hero{padding:54px 0 60px;background:
@@ -598,11 +609,10 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   .condition-cta{flex-direction:column;align-items:flex-start}
   .partners-inner{grid-template-columns:1fr}
   .loc-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .foot-brand{grid-column:1/-1}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
 }
 @media (max-width:560px){
-  .cond-grid,.value-grid,.footer-grid{grid-template-columns:1fr}
+  .cond-grid,.value-grid{grid-template-columns:1fr}
   .pay-modal-inner{padding:30px 20px 34px}
   .tx-modal-inner{padding:30px 22px 32px;margin:16px auto}
   .pay-rates{grid-template-columns:1fr}
