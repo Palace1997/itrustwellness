@@ -432,6 +432,9 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
    contact.html and leaves every other page's spacing alone. */
 .contact-lead{padding-bottom:5px}
 .contact-body{padding-top:5px}
+/* About page: same scoped tightening between the hero and the mission section. */
+.about-lead{padding-bottom:0}
+.about-body{padding-top:60px}
 
 /* ---------- contact form ---------- */
 .contact-form{display:flex;flex-direction:column;gap:16px}
