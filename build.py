@@ -18,6 +18,7 @@ Output: <name>.html  +  condition-<slug>.html  written to the project root.
 import os
 import re
 import sys
+import hashlib
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
@@ -255,6 +256,16 @@ def canonical_for(name):
 
 def build():
     base = read(os.path.join(SRC, "templates", "base.html"))
+    # Cache-busting: append a short content hash to the CSS/JS so a deploy always
+    # refreshes returning visitors, while unchanged files stay cached.
+    def _ver(rel):
+        try:
+            h = hashlib.md5(open(os.path.join(ROOT, rel), "rb").read()).hexdigest()[:8]
+            return rel + "?v=" + h
+        except OSError:
+            return rel
+    base = base.replace("assets/styles.css", _ver("assets/styles.css"))
+    base = base.replace("assets/script.js", _ver("assets/script.js"))
     cond_tpl = read(os.path.join(SRC, "templates", "condition.html"))
     footer = read(os.path.join(SRC, "partials", "footer.html"))
     header = read(os.path.join(SRC, "partials", "header.html"))
