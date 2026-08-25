@@ -687,7 +687,9 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   .crisis-bar,.site-header,.site-footer,.quick-bar,.sc-privacy,.sc-toolbar,.sc-actions{display:none !important}
   body{background:#fff}
   .page-hero{display:none}
-  .sc-card{box-shadow:none;border:0;border-radius:0;padding:0;max-width:none}
+  /* offset the block down so the leftover space sits evenly top and bottom
+     on a Letter page, rather than all at the bottom */
+  .sc-card{box-shadow:none;border:0;border-radius:0;padding:40px 0 0;max-width:none;width:100%}
   .sc-print-head{display:block;font-size:.9rem;color:#333;border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:18px}
   .sc-print-date{display:block;font-size:.8rem;color:#666;margin-top:2px}
   .sc-print-foot{display:block;margin-top:22px;padding-top:12px;border-top:1px solid #ccc;font-size:.82rem;color:#444;line-height:1.6}
