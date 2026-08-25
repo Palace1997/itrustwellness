@@ -675,6 +675,28 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .sc-restart{background:none;border:none;color:var(--sage);font-weight:700;font-family:inherit;cursor:pointer;font-size:.95rem;padding:0}
 .sc-restart:hover{color:var(--forest);text-decoration:underline}
 @media(max-width:560px){.sc-card{padding:26px 22px}.sc-q{font-size:1.2rem}}
+/* download / print results */
+.sc-toolbar{margin:2px 0 20px}
+.sc-download{display:inline-flex;align-items:center;gap:9px;background:var(--mint);color:var(--evergreen);border:1px solid var(--mint-deep);border-radius:999px;padding:10px 18px;font-family:inherit;font-weight:700;font-size:.92rem;cursor:pointer;transition:.16s}
+.sc-download svg{width:17px;height:17px}
+.sc-download:hover{background:var(--mint-deep)}
+.sc-download:focus-visible{outline:2px solid var(--sage);outline-offset:2px}
+.sc-print-head,.sc-print-foot{display:none}
+/* Print / Save-as-PDF: strip the site chrome, keep only the results card */
+@media print{
+  .crisis-bar,.site-header,.site-footer,.quick-bar,.sc-privacy,.sc-toolbar,.sc-actions{display:none !important}
+  body{background:#fff}
+  .page-hero{display:none}
+  .sc-card{box-shadow:none;border:0;border-radius:0;padding:0;max-width:none}
+  .sc-print-head{display:block;font-size:.9rem;color:#333;border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:18px}
+  .sc-print-date{display:block;font-size:.8rem;color:#666;margin-top:2px}
+  .sc-print-foot{display:block;margin-top:22px;padding-top:12px;border-top:1px solid #ccc;font-size:.82rem;color:#444;line-height:1.6}
+  .sc-results h2{font-size:1.6rem}
+  /* keep the colored severity bars in the PDF */
+  .sc-areabar,.sc-areabar span,.sc-crisis{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sc-area{break-inside:avoid}
+  a[href^="tel:"]{color:#000;text-decoration:none}
+}
 
 /* ===== Home "care designed to thrive" pillar cards (replaced the tabs) ===== */
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
