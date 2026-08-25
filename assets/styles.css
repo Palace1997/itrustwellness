@@ -687,28 +687,29 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   .crisis-bar,.site-header,.site-footer,.quick-bar,.sc-privacy,.sc-toolbar,.sc-actions{display:none !important}
   body{background:#fff}
   .page-hero{display:none}
-  /* offset the block down so the leftover space sits evenly top and bottom
-     on a Letter page, rather than all at the bottom */
-  .sc-card{box-shadow:none;border:0;border-radius:0;padding:40px 0 0;max-width:none;width:100%}
+  /* Top offset centers the (deliberately compact) block on the page. Kept modest
+     so the total stays well under one page's height with room to spare. */
+  .sc-card{box-shadow:none;border:0;border-radius:0;padding:80px 0 0;max-width:none;width:100%}
   .sc-print-head{display:block;font-size:.9rem;color:#333;border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:18px}
   .sc-print-date{display:block;font-size:.8rem;color:#666;margin-top:2px}
   .sc-print-foot{display:block;margin-top:22px;padding-top:12px;border-top:1px solid #ccc;font-size:.82rem;color:#444;line-height:1.6}
-  /* one page, comfortably filled — spacing tuned so the sheet reads balanced */
-  @page{margin:14mm}
+  /* one page, guaranteed — compact with a real buffer, then centered via the
+     .sc-card top offset above */
+  @page{margin:13mm}
   .section-pad{padding:0 !important}
-  .sc-results h2{font-size:1.8rem;margin:0 0 7px}
-  .sc-disclaimer{font-size:.96rem;margin:0 0 18px}
-  .sc-crisis{padding:14px 18px;margin:0 0 18px}
-  .sc-crisis h3{font-size:1.15rem;margin:0 0 5px}
-  .sc-crisis p{font-size:.93rem;margin:0;line-height:1.5}
-  .sc-area{padding:12px 0}
-  .sc-area-top{margin-bottom:8px}
-  .sc-area-name{font-size:1.12rem}
-  .sc-areabar{height:9px;margin-bottom:8px}
-  .sc-area p{font-size:.93rem;line-height:1.5}
-  .sc-summary{padding:15px 18px;margin:18px 0 0;font-size:.98rem;line-height:1.5}
-  .sc-print-head{margin-bottom:16px;padding-bottom:11px}
-  .sc-print-foot{margin-top:18px;padding-top:12px;font-size:.83rem}
+  .sc-results h2{font-size:1.55rem;margin:0 0 5px}
+  .sc-disclaimer{font-size:.88rem;margin:0 0 12px}
+  .sc-crisis{padding:11px 15px;margin:0 0 12px}
+  .sc-crisis h3{font-size:1.05rem;margin:0 0 4px}
+  .sc-crisis p{font-size:.86rem;margin:0;line-height:1.45}
+  .sc-area{padding:8px 0}
+  .sc-area-top{margin-bottom:5px}
+  .sc-area-name{font-size:1.03rem}
+  .sc-areabar{height:8px;margin-bottom:5px}
+  .sc-area p{font-size:.86rem;line-height:1.4}
+  .sc-summary{padding:11px 15px;margin:12px 0 0;font-size:.9rem;line-height:1.45}
+  .sc-print-head{margin-bottom:12px;padding-bottom:8px}
+  .sc-print-foot{margin-top:14px;padding-top:9px;font-size:.78rem}
   /* keep the colored severity bars in the PDF */
   .sc-areabar,.sc-areabar span,.sc-crisis,.sc-summary{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sc-area,.sc-crisis,.sc-summary,.sc-print-foot{break-inside:avoid}
