@@ -36,6 +36,15 @@ if (contact) {
     contact.setAttribute('method', 'POST');
   }
 
+  // Reveal the "email your CV" note when someone picks Careers
+  const reason = contact.querySelector('#cf-reason');
+  const careersNote = contact.querySelector('#cfCareers');
+  if (reason && careersNote) {
+    const syncCareers = () => { careersNote.hidden = reason.value !== 'Careers'; };
+    reason.addEventListener('change', syncCareers);
+    syncCareers();
+  }
+
   contact.addEventListener('submit', (e) => {
     e.preventDefault();
 

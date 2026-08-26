@@ -461,6 +461,11 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
   outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(62,142,110,.15);
 }
 .form-note{font-size:.82rem;color:var(--muted)}
+.cf-careers-note{display:flex;gap:11px;align-items:flex-start;background:var(--mint);border:1px solid var(--mint-deep);border-radius:14px;padding:14px 16px;margin-bottom:4px}
+.cf-careers-note[hidden]{display:none}
+.cf-careers-note svg{width:20px;height:20px;flex:none;margin-top:2px;color:var(--sage)}
+.cf-careers-note p{margin:0;font-size:.9rem;color:var(--evergreen);line-height:1.5}
+.cf-careers-note a{color:var(--sage);font-weight:700}
 .form-status{font-weight:700;color:var(--forest);min-height:1.2em}
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;margin-top:40px;align-items:stretch}
 .contact-grid>.info-card{order:2}

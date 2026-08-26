@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=40ca66a3" />
+  <link rel="stylesheet" href="assets/styles.css?v=79c7f157" />
 
   <script type="application/ld+json">
   {
@@ -184,6 +184,11 @@
                 <option>Something else</option>
               </select>
             </div>
+            <!-- Shown only when "Careers" is selected — no file upload on this plan, so applicants email their CV. -->
+            <div class="cf-careers-note" id="cfCareers" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 6 8-6"/></svg>
+              <p>Applying for a role? Send your CV and a short note to <a href="mailto:info@itrustwellness.com?subject=Job%20application">info@itrustwellness.com</a> and our team will take it from there.</p>
+            </div>
             <div class="field">
               <label for="cf-message">Message</label>
               <textarea id="cf-message" name="message" placeholder="Tell us a little about how we can help…"></textarea>
@@ -328,6 +333,6 @@
   </div>
 
 
-  <script src="assets/script.js?v=89fc3596"></script>
+  <script src="assets/script.js?v=52eebe3a"></script>
 </body>
 </html>
