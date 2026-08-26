@@ -42,6 +42,25 @@ if (contact) {
   if (reason && careersNote) {
     const syncCareers = () => { careersNote.hidden = reason.value !== 'Careers'; };
     reason.addEventListener('change', syncCareers);
+
+    // Deep links can preselect a reason, e.g. contact.html?reason=partnerships
+    // (used by the Partners page "Talk to us" / "Make a referral" buttons).
+    const reasonKey = new URLSearchParams(location.search).get('reason');
+    if (reasonKey) {
+      const map = {
+        'new-patient': 'Becoming a new patient',
+        'care': 'Question about my care',
+        'insurance': 'Insurance & billing',
+        'partnerships': 'Referrals & partnerships',
+        'careers': 'Careers',
+        'other': 'Something else'
+      };
+      const want = map[reasonKey.toLowerCase()];
+      if (want) {
+        const opt = [...reason.options].find(o => o.text === want);
+        if (opt) reason.value = opt.value;
+      }
+    }
     syncCareers();
   }
 
