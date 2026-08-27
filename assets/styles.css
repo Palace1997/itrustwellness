@@ -624,6 +624,8 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 /* ===== Patients "Two Doors" (new vs current self-select) ===== */
 .doors-head{max-width:640px;margin:0 auto 34px}
 .doors-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+/* when the portal (returning-patient) door is absent on the live build, center the lone door */
+.doors-grid > .door:only-child{grid-column:1/-1;max-width:520px;margin:0 auto}
 .door{border-radius:22px;padding:34px 30px;border:1.5px solid rgba(20,58,43,.12)}
 .door-new{background:var(--mint)}
 .door-current{background:var(--white)}

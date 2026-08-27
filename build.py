@@ -254,6 +254,23 @@ def canonical_for(name):
     return SITE_URL if name == "index.html" else SITE_URL + name
 
 
+# Patient portal is a demo we keep locally but not on the live/deploy build.
+# Content wrapped in <!--PORTAL-->...<!--/PORTAL--> is kept only when building with
+# the portal on; <!--NOPORTAL-->...<!--/NOPORTAL--> is the live-only alternate.
+# Default is OFF (live-safe): plain `python3 build.py` omits the portal.
+# Turn it on locally with:  WITH_PORTAL=1 python3 build.py
+WITH_PORTAL = os.environ.get("WITH_PORTAL", "").strip().lower() in ("1", "true", "yes", "on")
+
+def apply_portal(html):
+    if WITH_PORTAL:
+        html = re.sub(r"<!--NOPORTAL-->.*?<!--/NOPORTAL-->", "", html, flags=re.DOTALL)
+        html = html.replace("<!--PORTAL-->", "").replace("<!--/PORTAL-->", "")
+    else:
+        html = re.sub(r"<!--PORTAL-->.*?<!--/PORTAL-->", "", html, flags=re.DOTALL)
+        html = html.replace("<!--NOPORTAL-->", "").replace("<!--/NOPORTAL-->", "")
+    return html
+
+
 def build():
     base = read(os.path.join(SRC, "templates", "base.html"))
     # Cache-busting: append a short content hash to the CSS/JS so a deploy always
@@ -286,6 +303,7 @@ def build():
             .replace("{{MAIN}}", body.strip())
             .replace("{{FOOTER}}", footer)
         )
+        html = apply_portal(html)
         write(os.path.join(ROOT, name), html)
         built.append(name)
 
@@ -341,6 +359,7 @@ def build():
             .replace("{{MAIN}}", body.strip())
             .replace("{{FOOTER}}", footer)
         )
+        html = apply_portal(html)
         write(os.path.join(ROOT, f'condition-{c["slug"]}.html'), html)
         built.append(f'condition-{c["slug"]}.html')
 
