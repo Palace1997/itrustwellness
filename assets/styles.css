@@ -144,6 +144,23 @@ h1,h2{letter-spacing:-.015em;text-transform:capitalize}
 .hero-badge ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:8px}
 .hero-badge li{font-size:.92rem;color:var(--evergreen);border-top:1px solid rgba(20,58,43,.15);padding-top:8px}
 .hero-badge li strong{font-size:1.05rem}
+/* Homepage hero — color-blocked split (evergreen copy panel + photo right) */
+.hero-blocked .home-hero-grid{max-width:var(--maxw);margin:0 auto;padding:0 24px;align-items:stretch}
+.hero-blocked .home-hero-copy{background:var(--evergreen);color:#fff;padding:56px 46px;border-radius:var(--radius-lg) 0 0 var(--radius-lg)}
+.hero-blocked .home-hero-copy .eyebrow{color:#cdd8bf}
+.hero-blocked .hero-title{color:#fff}
+.hero-blocked .hl{color:var(--evergreen)}
+.hero-blocked .hero-sub{color:rgba(255,255,255,.9)}
+.hero-blocked .hero-sub strong{color:#fff}
+.hero-blocked .btn-outline{border-color:rgba(255,255,255,.8);color:#fff}
+.hero-blocked .btn-outline:hover{background:#fff;border-color:#fff;color:var(--evergreen)}
+.hero-blocked .home-hero-media .hero-photo-frame{border-radius:0 var(--radius-lg) var(--radius-lg) 0}
+.hero-blocked .home-hero-media .hero-photo-frame img{min-height:500px}
+.hero-blocked .home-hero-media .hero-badge{left:-18px}
+@media (max-width:980px){
+  .hero-blocked .home-hero-copy{padding:40px 26px;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+  .hero-blocked .home-hero-media .hero-photo-frame{border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+}
 .hero-title{font-size:clamp(2.4rem,5.6vw,4.4rem);max-width:14ch;font-weight:600}
 .hl{background:var(--amber);padding:0 .12em;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .hl-blue{background:#cbd8bc}
