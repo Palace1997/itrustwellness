@@ -236,27 +236,26 @@
     .itf-h{font-family:"GT Super Display","Fraunces",Georgia,serif;font-weight:600;font-size:clamp(1.5rem,2.8vw,2.05rem);color:#1f3d2a;margin:0 0 .7rem;line-height:1.14}
     .itf-lead{max-width:60ch;margin:0 auto 2rem;color:#54614e;font-size:1rem;line-height:1.6}
     .itf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
-    .itf-cube{display:flex;flex-direction:column;min-height:272px;background:#fff;border:3px solid #173a22;border-radius:14px;box-shadow:9px 9px 0 #173a22;overflow:hidden;text-decoration:none;text-align:left;transition:transform .18s,box-shadow .18s}
-    a.itf-cube:hover{transform:translate(6px,6px);box-shadow:3px 3px 0 #173a22}
-    .itf-cap{display:flex;align-items:center;justify-content:center;min-height:120px;padding:22px;border-bottom:3px solid #173a22;position:relative;background:#1f4d2e}
-    .itf-cube.well .itf-cap{background:#26582f}
-    .itf-cube.cares .itf-cap{background:#2f6338}
-    .itf-cap img{max-height:52px;max-width:180px;width:auto;height:auto;object-fit:contain;display:block}
-    .itf-here{position:absolute;top:16px;right:16px;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#fff;background:#ee6c4d;padding:5px 11px;border-radius:6px}
-    .itf-body{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;padding:20px 22px}
-    .itf-stage{font-family:"GT Super Display","Fraunces",Georgia,serif;font-weight:700;font-size:1.4rem;color:#1f3d2a;line-height:1.05}
-    .itf-age{align-self:flex-start;background:#eee7d6;border:2px solid #173a22;border-radius:6px;font-weight:800;font-size:.9rem;padding:5px 12px;color:#1f3d2a}
-    .itf-cta{display:inline-flex;align-items:center;gap:8px;background:#ee6c4d;color:#fff;border:2px solid #173a22;font-weight:800;font-size:.86rem;padding:9px 16px;border-radius:8px}
-    @media(max-width:760px){.itf-grid{grid-template-columns:1fr;max-width:380px}.itf-cube{min-height:auto}}
+    .itf-stamp{position:relative;border-radius:18px;min-height:420px;padding:32px 22px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;text-decoration:none;box-shadow:0 18px 40px -22px rgba(23,58,34,.5);transition:transform .3s,box-shadow .3s;overflow:hidden;background:#1f4d2e}
+    .itf-stamp.well{background:#3f7d4c}.itf-stamp.cares{background:#7d8a4a}
+    .itf-stamp::before{content:"";position:absolute;inset:13px;border:2.5px solid rgba(255,255,255,.5);border-radius:12px;pointer-events:none;transition:inset .3s}
+    a.itf-stamp:hover{transform:translateY(-6px);box-shadow:0 34px 64px -26px rgba(23,58,34,.62)}
+    a.itf-stamp:hover::before{inset:9px}
+    .itf-logo{max-height:52px;max-width:170px;width:auto;height:auto;object-fit:contain;filter:brightness(0) invert(1);display:block;margin-bottom:4px}
+    .itf-here{position:absolute;top:18px;right:18px;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#fff;background:#ee6c4d;padding:6px 13px;border-radius:7px}
+    .itf-age{font-family:"GT Super Display","Fraunces",Georgia,serif;font-weight:700;font-size:2.5rem;line-height:1}
+    .itf-stage{font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.8rem;opacity:.92}
+    .itf-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1f3d2a;font-weight:800;font-size:.85rem;padding:11px 20px;border-radius:8px;margin-top:8px}
+    @media(max-width:760px){.itf-grid{grid-template-columns:1fr;max-width:380px}.itf-stamp{min-height:290px}}
     </style>
     <div class="itf-wrap">
       <p class="itf-eyebrow">One iTrust family</p>
       <h2 class="itf-h">Mental Health Care For Every Stage of Life</h2>
       <p class="itf-lead">Emotional and cognitive well-being can affect individuals of all ages. iTrust Wellness cares for adults, alongside iTrust Pediatrics for children and adolescents and iTrust Cares for older adults, so families find connected care at every stage.</p>
       <div class="itf-grid">
-        <a class="itf-cube" href="https://palace1997.github.io/iTrust-Pediatrics/" target="_blank" rel="noopener"><div class="itf-cap"><img src="https://palace1997.github.io/iTrust-Pediatrics/assets/logo/HorizontalDARKBGPeds.png" alt="iTrust Pediatrics"></div><div class="itf-body"><span class="itf-stage">Children &amp; adolescents</span><span class="itf-age">Ages 5&ndash;17</span><span class="itf-cta">iTrust Pediatrics &rarr;</span></div></a>
-        <div class="itf-cube well"><div class="itf-cap"><img src="https://palace1997.github.io/iTrust-Pediatrics/assets/logo/itrust-wellness-dark.svg" alt="iTrust Wellness"><span class="itf-here">Here</span></div><div class="itf-body"><span class="itf-stage">Adults</span><span class="itf-age">Ages 18&ndash;64</span></div></div>
-        <a class="itf-cube cares" href="https://palace1997.github.io/itrustcares/" target="_blank" rel="noopener"><div class="itf-cap"><img src="https://palace1997.github.io/iTrust-Pediatrics/assets/logo/itrust-cares-dark.svg" alt="iTrust Cares"></div><div class="itf-body"><span class="itf-stage">Older adults</span><span class="itf-age">Ages 65+</span><span class="itf-cta">iTrust Cares &rarr;</span></div></a>
+        <a class="itf-stamp" href="https://palace1997.github.io/iTrust-Pediatrics/" target="_blank" rel="noopener"><img class="itf-logo" src="https://palace1997.github.io/iTrust-Pediatrics/assets/logo/peds-horizontal.png" alt="iTrust Pediatrics"><div class="itf-age">5&ndash;17</div><div class="itf-stage">Children &amp; adolescents</div><span class="itf-cta">iTrust Pediatrics &rarr;</span></a>
+        <div class="itf-stamp well"><span class="itf-here">Here</span><img class="itf-logo" src="https://palace1997.github.io/iTrust-Pediatrics/assets/logo/itrust-wellness.svg" alt="iTrust Wellness"><div class="itf-age">18&ndash;64</div><div class="itf-stage">Adults</div></div>
+        <a class="itf-stamp cares" href="https://palace1997.github.io/itrustcares/" target="_blank" rel="noopener"><img class="itf-logo" src="https://palace1997.github.io/iTrust-Pediatrics/assets/logo/itrust-cares.svg" alt="iTrust Cares"><div class="itf-age">65+</div><div class="itf-stage">Older adults</div><span class="itf-cta">iTrust Cares &rarr;</span></a>
       </div>
     </div>
   </section>
