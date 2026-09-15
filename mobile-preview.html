@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iTrust Wellness — Mobile Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+  <style>
+    :root {
+      --evergreen:#17281e; --forest:#223a2a; --sage:#5f7a4a; --mint:#E7EDDF;
+      --mint-deep:#CFDCC0; --amber:#94a276; --cream:#F5F7F1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 2rem 1rem 3rem;
+      background: radial-gradient(1200px 600px at 50% -10%, var(--mint), var(--mint-deep) 60%, #c3d1b3);
+      font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+      display: flex; flex-direction: column; align-items: center; gap: 1.1rem;
+    }
+    .mp-head { text-align: center; color: var(--evergreen); }
+    .mp-head h1 { font-size: 1.3rem; margin: 0 0 .25rem; font-weight: 800; letter-spacing: -.01em; }
+    .mp-head p { margin: 0; color: var(--forest); font-size: .9rem; }
+    .mp-controls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; align-items: center; }
+    .mp-btn {
+      border: 1.5px solid rgba(23,40,30,.28); background: rgba(255,255,255,.72); color: var(--forest);
+      font: 800 .82rem inherit; padding: .5rem .9rem; border-radius: 999px; cursor: pointer; transition: .2s;
+    }
+    .mp-btn:hover { background: #fff; }
+    .mp-btn.active { background: var(--forest); color: #fff; border-color: var(--forest); }
+    .mp-select {
+      font: 700 .82rem inherit; color: var(--forest); background: rgba(255,255,255,.72);
+      border: 1.5px solid rgba(23,40,30,.28); border-radius: 999px; padding: .5rem 2rem .5rem .9rem; cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23223a2a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right .75rem center;
+    }
+    /* phone shell */
+    .mp-phone {
+      background: var(--evergreen); padding: 14px; border-radius: 46px;
+      box-shadow: 0 26px 70px rgba(20,40,26,.42); transition: width .35s cubic-bezier(.22,1,.36,1);
+      max-width: 96vw;
+    }
+    .mp-screen {
+      position: relative; background: var(--cream); border-radius: 34px; overflow: hidden;
+      height: 80vh; min-height: 560px;
+    }
+    .mp-notch { position: absolute; top: 0; left: 0; right: 0; height: 26px; display: flex; align-items: center; justify-content: center; z-index: 3; pointer-events: none; }
+    .mp-notch span { width: 120px; height: 7px; border-radius: 5px; background: var(--evergreen); opacity: .85; }
+    .mp-screen iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .mp-hint { color: var(--forest); font-size: .82rem; opacity: .85; text-align: center; max-width: 440px; }
+    .mp-hint strong { color: var(--evergreen); }
+  </style>
+</head>
+<body>
+  <div class="mp-head">
+    <h1>iTrust Wellness — Mobile preview</h1>
+    <p>The live site, rendered at a phone width. Scroll inside the phone.</p>
+  </div>
+
+  <div class="mp-controls">
+    <button class="mp-btn active" data-w="390">Phone · 390</button>
+    <button class="mp-btn" data-w="360">Small · 360</button>
+    <button class="mp-btn" data-w="430">Large · 430</button>
+    <button class="mp-btn" data-w="768">Tablet · 768</button>
+    <select class="mp-select" id="page" aria-label="Choose a page to preview">
+      <option value="index.html">Home</option>
+      <option value="about.html">About</option>
+      <option value="treatments.html">Treatments</option>
+      <option value="patients.html">Patients</option>
+      <option value="partners.html">Partners</option>
+      <option value="locations.html">Locations</option>
+      <option value="contact.html">Contact</option>
+      <option value="assessment.html">Assessment</option>
+    </select>
+  </div>
+
+  <div class="mp-phone" id="phone" style="width: 418px;">
+    <div class="mp-screen">
+      <div class="mp-notch"><span></span></div>
+      <iframe id="frame" src="index.html" title="iTrust Wellness mobile view"></iframe>
+    </div>
+  </div>
+
+  <p class="mp-hint">Tip: this shows the real responsive layout. To test on the actual page instead, open <strong>index.html</strong> and narrow your browser window (or use DevTools device mode).</p>
+
+  <script>
+    var phone = document.getElementById("phone");
+    var btns = document.querySelectorAll(".mp-btn");
+    var frame = document.getElementById("frame");
+    var pageSel = document.getElementById("page");
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var w = parseInt(b.getAttribute("data-w"), 10);
+        phone.style.width = (w + 28) + "px"; /* +28 for the bezel padding */
+        btns.forEach(function (x) { x.classList.remove("active"); });
+        b.classList.add("active");
+      });
+    });
+    pageSel.addEventListener("change", function () {
+      frame.src = pageSel.value;
+    });
+  </script>
+</body>
+</html>
