@@ -268,3 +268,13 @@ if (document.querySelector('a[href$="treatments.html#methods"], .method-card')) 
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeTx(); });
 }
 
+// --- Auto-hide the page scrollbar: visible only while scrolling ---
+(function () {
+  var root = document.documentElement, timer;
+  window.addEventListener('scroll', function () {
+    root.classList.add('is-scrolling');
+    clearTimeout(timer);
+    timer = setTimeout(function () { root.classList.remove('is-scrolling'); }, 800);
+  }, { passive: true });
+})();
+
