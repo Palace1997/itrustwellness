@@ -285,6 +285,9 @@ def build():
     base = base.replace("assets/script.js", _ver("assets/script.js"))
     cond_tpl = read(os.path.join(SRC, "templates", "condition.html"))
     footer = read(os.path.join(SRC, "partials", "footer.html"))
+    # "One iTrust family" band sits above the footer on every page
+    family = read(os.path.join(SRC, "partials", "family.html"))
+    footer = family + "\n" + footer
     header = read(os.path.join(SRC, "partials", "header.html"))
     # inject the mega-menu lists into the shared header once
     header = header.replace("{{NAV_CONDITIONS}}", mega_conditions()).replace("{{NAV_METHODS}}", mega_methods())
