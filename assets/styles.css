@@ -784,3 +784,26 @@ html::-webkit-scrollbar-thumb{background:transparent;border-radius:10px;border:3
 html.is-scrolling::-webkit-scrollbar-thumb{background:rgba(34,58,42,.42);background-clip:padding-box}
 html.is-scrolling::-webkit-scrollbar-thumb:hover{background:rgba(34,58,42,.6);background-clip:padding-box}
 @media (prefers-reduced-motion:reduce){html::-webkit-scrollbar-thumb{transition:none}}
+
+/* One iTrust family band (Pediatrics / Wellness / Cares by age) */
+.itrust-family{background:var(--cream);border-top:1px solid rgba(23,40,30,.08);padding:64px 0;text-align:center}
+.itrust-family .container{max-width:1030px}
+.fam-eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin:0 0 .7rem}
+.fam-h{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,2.8vw,2.2rem);color:var(--evergreen);margin:0 0 .8rem;text-wrap:balance}
+.fam-lead{max-width:62ch;margin:0 auto 2.2rem;color:var(--muted);font-size:1.02rem;line-height:1.6}
+.fam-lead .fam-years{color:var(--amber);font-weight:800;white-space:nowrap}
+.fam-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:970px;margin:0 auto}
+.fam-stamp{position:relative;border-radius:18px;min-height:300px;padding:30px 24px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;text-decoration:none;box-shadow:0 18px 40px -22px rgba(23,40,30,.5);transition:transform .3s ease,box-shadow .3s;overflow:hidden;background:#1f4d2e}
+.fam-stamp.fam-well{background:#3f7d4c}
+.fam-stamp.fam-cares{background:#5c6d33}
+.fam-stamp::before{content:"";position:absolute;inset:13px;border:2.5px solid rgba(255,255,255,.5);border-radius:12px;pointer-events:none;transition:inset .3s}
+a.fam-stamp:hover{transform:translateY(-6px);box-shadow:0 34px 64px -26px rgba(23,40,30,.62)}
+a.fam-stamp:hover::before{inset:9px}
+a.fam-stamp:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.fam-logo{max-height:56px;max-width:180px;width:auto;height:auto;object-fit:contain;display:block;margin-bottom:4px}
+.fam-stamp.is-here .fam-logo{max-height:84px;max-width:230px}
+.fam-here{position:absolute;top:18px;right:18px;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--evergreen);background:var(--mint-deep);padding:6px 13px;border-radius:7px}
+.fam-age{font-family:var(--font-display);font-weight:700;font-size:2.6rem;line-height:1}
+.fam-stage{font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.82rem;opacity:.92}
+.fam-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--evergreen);font-weight:800;font-size:.86rem;padding:11px 20px;border-radius:8px;margin-top:8px}
+@media (max-width:760px){.fam-grid{grid-template-columns:1fr;max-width:380px}}
